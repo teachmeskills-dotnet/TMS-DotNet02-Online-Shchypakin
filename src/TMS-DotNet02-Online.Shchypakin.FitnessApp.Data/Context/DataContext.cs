@@ -15,6 +15,7 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Data.Context
         public DataContext(DbContextOptions options) : base(options)
         {
         }
+        
 
         public DbSet<Membership> Memberships { get; set; }
 
