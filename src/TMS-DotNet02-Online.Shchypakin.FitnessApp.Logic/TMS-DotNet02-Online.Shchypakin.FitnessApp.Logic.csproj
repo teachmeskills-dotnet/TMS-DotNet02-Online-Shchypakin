@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic</RootNamespace>
+  </PropertyGroup>
+
+</Project>
