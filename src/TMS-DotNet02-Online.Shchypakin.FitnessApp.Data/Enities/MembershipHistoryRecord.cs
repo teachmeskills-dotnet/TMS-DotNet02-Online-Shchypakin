@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TeachMeSkills.Shchypakin.Homework_8.Entities
+namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Data.Enities
 {
     public class MembershipHistoryRecord
     {

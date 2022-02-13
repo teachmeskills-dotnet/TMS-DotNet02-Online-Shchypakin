@@ -1,4 +1,4 @@
-﻿namespace Masny.TimeTracker.Data.Constants
+﻿namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Data.Constants
 {
     /// <summary>
     /// Schema constants.
