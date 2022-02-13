@@ -5,4 +5,13 @@
     <RootNamespace>TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TMS-DotNet02-Online.Shchypakin.FitnessApp.Data\TMS-DotNet02-Online.Shchypakin.FitnessApp.Data.csproj" />
+  </ItemGroup>
+
 </Project>
