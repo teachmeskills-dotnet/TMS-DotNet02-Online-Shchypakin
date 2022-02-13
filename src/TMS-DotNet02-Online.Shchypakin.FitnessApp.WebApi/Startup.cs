@@ -33,50 +33,9 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApplicationServices(_config);
-            services.AddControllers();
-            //services.AddSwaggerGen(c =>
-            //{
-            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "TeachMeSkills.Shchypakin.Homework_8", Version = "v1" });
-            //});
+            services.AddControllers();           
             services.AddIndentityServices(_config);
-
-            services.AddSwaggerGen(config =>
-            {
-                config.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Version = "v1",
-                    Title = "API",
-                    Description = "Social Media Dashboard API",
-                    Contact = new OpenApiContact()
-                    {
-                        //Name = "Mikhail M. & Alexandr G.",
-                        //Url = new Uri("https://social-media-dashboard-api.herokuapp.com/") // UNDONE: add it after deploy
-                    }
-                });
-
-                var securitySchema = new OpenApiSecurityScheme
-                {
-                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
-                    Name = "Authorization",
-                    In = ParameterLocation.Header,
-                    Type = SecuritySchemeType.Http,
-                    Scheme = "bearer",
-                    Reference = new OpenApiReference
-                    {
-                        Type = ReferenceType.SecurityScheme,
-                        Id = "Bearer"
-                    }
-                };
-                config.AddSecurityDefinition("Bearer", securitySchema);
-
-                var securityRequirement = new OpenApiSecurityRequirement
-                {
-                    {
-                        securitySchema, new[] { "Bearer" }
-                    }
-                };
-                config.AddSecurityRequirement(securityRequirement);
-            });
+            services.AddSwaggerServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
