@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Migrations
+namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Data.Migrations
 {
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
