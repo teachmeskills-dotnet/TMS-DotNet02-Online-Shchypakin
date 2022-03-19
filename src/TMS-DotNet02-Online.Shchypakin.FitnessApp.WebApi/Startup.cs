@@ -53,7 +53,7 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi
 
             app.UseRouting();
 
-            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://lockalhost:4200"));
+            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
 
             app.UseAuthentication();
 

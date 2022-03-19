@@ -23,7 +23,7 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Extentions
             });
             //services.AddDbContext<DataContext>(options =>
             //    options.UseSqlServer(config.GetConnectionString("ApplicationConnection")));
-
+            services.AddCors();
             return services;
         }
     }
