@@ -20,7 +20,7 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Extentions
         {
             services.AddIdentityCore<Client>(opt =>
             {
-                opt.Password.RequireNonAlphanumeric = false;
+                opt.Password.RequireNonAlphanumeric = false;              
                 //opt.SignIn.RequireConfirmedPhoneNumber = true;
 
             })
