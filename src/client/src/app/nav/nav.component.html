@@ -24,7 +24,7 @@
 
         <form *ngIf="(accountService.currentUser$ | async) === null" #loginForm="ngForm" class="d-flex flex-row" (ngSubmit)="login()" 
           autocomplete="off">
-          <input 
+          <!--<input 
             name="clientname"
             [(ngModel)]="model.clientname"
             class="form-control mr-sm-2" 
@@ -35,10 +35,16 @@
             [(ngModel)]="model.password"
             class="form-control mr-sm-2" 
             type="password" 
-            placeholder="Password">
-          <button class="btn btn-primary" type="submit">Login</button>
+            placeholder="Password">-->
+          <div class="form-group text-center d-flex flex-row">
+            <!--<button class="btn btn-primary mr-2" type="submit">Login</button>-->
+            <button class="btn btn-primary mr-2" type="button" routerLink="/login">Login</button>
+            <button class="btn btn-success mr-2" type="button" routerLink="/register">Sign up</button>
+          </div>  
+          
           <!--<a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Primary link</a>
-              <a href="#" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Link</a>-->
+              <a href="#" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Link</a>
+              <button class="btn btn-primary" type="submit">Login</button>-->
         </form>
       </div>
   </nav>
