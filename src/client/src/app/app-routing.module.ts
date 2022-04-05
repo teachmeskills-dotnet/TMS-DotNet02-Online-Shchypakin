@@ -7,12 +7,13 @@ import { MemberDetailComponent } from './members/member-detail/member-detail.com
 import { MemberListComponent } from './members/member-list/member-list.component';
 import { MessagesComponent } from './messages/messages.component';
 import { RegisterComponent } from './register/register.component';
+import { AuthGuard } from './_guards/auth.guard';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'members', component: MemberListComponent},
+  {path: 'members', component: MemberListComponent, canActivate: [AuthGuard]},
   {path: 'members/:id', component: MemberDetailComponent},
   {path: 'lists', component: ListsComponent},
   {path: 'messages', component: MessagesComponent},

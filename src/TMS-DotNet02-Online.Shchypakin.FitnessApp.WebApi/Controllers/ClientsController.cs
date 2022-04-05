@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TMS_DotNet02_Online.Shchypakin.FitnessApp.Data.Enities;
 using TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Dto;
 using TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Interfaces;
 
@@ -42,6 +43,31 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Controllers
         {
             var client = await _clientRepository.GetMemberAsync(clientname);
             return client;
+        }
+
+        [Authorize]
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult<Client>> UpdateClient(int id, FromClientMemberDto client)
+        {
+            if (id != client.Id)
+                return BadRequest("Client ID mismatch");
+
+            
+
+            if (!_clientRepository.ClientExists(id))
+                return NotFound($"Client with Id = {id} not found");
+
+            //Client clientToUpdate = _mapper.Map<Client>(client);
+
+            var clientToUpdate = await _clientRepository.GetClientByIdAsync(id);
+
+            clientToUpdate.Birthday = client.Birthday;
+
+            _clientRepository.Update(clientToUpdate);
+
+            await _clientRepository.SaveAllAsync();
+
+            return Ok();
         }
     }
 }

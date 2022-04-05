@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-4">
         <form #registerForm="ngForm" (ngSubmit)="register()" autocomplete="off">
-            <h2 class="text-center text-primary">Sign up</h2>
+            <h2 class="text-center text-default">Sign up</h2>
             <hr>
             <div class="form-group">
                 <input type="text" class="form-control" name="username" [(ngModel)]="model.username" placeholder="Username">
@@ -19,7 +19,7 @@
             </div>
             <div class="form-group text-center">
                 <button class="btn btn-success mr-2" type="submit">Register</button>
-                <button class="btn btn-default mr-2" (click)="cancel()" type="button">Cancel</button>
+                <button class="btn btn-secondary mr-2" (click)="cancel()" type="button">Cancel</button>
             </div>
         </form>
     </div>

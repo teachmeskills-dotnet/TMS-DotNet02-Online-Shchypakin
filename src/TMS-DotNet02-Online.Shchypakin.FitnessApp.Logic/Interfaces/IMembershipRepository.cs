@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Dto;
 
 namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Interfaces
 {
-    class Class1
+    public interface IMembershipRepository
     {
+        Task<MemberDto> GetMemberAsync(string clientname);
     }
 }

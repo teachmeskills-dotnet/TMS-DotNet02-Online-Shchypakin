@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -63,7 +64,7 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Managers
             var clientsToSend = clients.Select(c => new MemberDto
             {
                 FullName = c.FullName,
-                Phone = c.Phone,
+                PhoneNumber = c.PhoneNumber,
                 Birthday = c.Birthday,
                 Comment = c.Comment,
                 Memberships = c.Memberships.Where(m => m.IsActive == true).ToList()
@@ -80,6 +81,11 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Managers
         public void Update(Client client)
         {
             _context.Entry(client).State = EntityState.Modified;
+        }
+
+        public bool ClientExists(int id)
+        {
+            return _context.Users.Any(e => e.Id == id);
         }
     }
 }
