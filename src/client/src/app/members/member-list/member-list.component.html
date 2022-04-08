@@ -1,12 +1,29 @@
 <p>member-list works!</p>
 <div class="form-group">
-    <label>Users</label>
-    
+  <!--  <label>Users</label>
+   
     <select class="form-control">
         <option *ngFor="let user of membersNames" [value]="user.fullName">
             {{user.fullName}}
         </option>
     </select>
 
-   
+    <ng-autocomplete>
+        <option *ngFor="let user of membersNames" [value]="user.fullName"> [displayWith]="displayFn"
+            {{user.fullName}}
+        </option>
+    </ng-autocomplete>
+
+    [(ngModel)]="name.fullName"    <button class="btn btn-secondary mr-2" (click)="cancel()" type="button">Cancel</button>
+  --> 
+  
+ <mat-form-field style="width: 300px; display: block;">
+    <input type="text" placeholder="Enter name" matInput [matAutocomplete]="auto" [formControl] = "myControl" (click)="onInputClick()">
+       <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" >
+        <mat-option *ngFor="let user of autoFilter | async" [value]="user">
+            {{user}}
+        </mat-option>
+    </mat-autocomplete>
+ </mat-form-field>
+
 </div>
