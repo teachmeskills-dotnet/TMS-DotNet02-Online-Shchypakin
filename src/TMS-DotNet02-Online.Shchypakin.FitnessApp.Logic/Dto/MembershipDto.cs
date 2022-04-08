@@ -5,7 +5,7 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Dto
 {
     public class MembershipDto
     {
-        //public int Id { get; set; }
+        public int Id { get; set; }
 
         public DateTime Start { get; set; }
 

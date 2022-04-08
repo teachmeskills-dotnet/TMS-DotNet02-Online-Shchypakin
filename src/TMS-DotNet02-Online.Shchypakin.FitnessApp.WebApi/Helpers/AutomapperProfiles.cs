@@ -12,6 +12,7 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Helpers
             CreateMap<FromClientMemberDto, Client>();
             CreateMap<Membership, MembershipDto>();
             CreateMap<Membership, FromClientMembershipDto>();
+            CreateMap<FromClientMembershipDto, Membership>();
             CreateMap<MembershipSize, MembershipSizeDto>();
             CreateMap<MembershipType, MembershipTypeDto>();
             CreateMap<RegisterDto, Client>();

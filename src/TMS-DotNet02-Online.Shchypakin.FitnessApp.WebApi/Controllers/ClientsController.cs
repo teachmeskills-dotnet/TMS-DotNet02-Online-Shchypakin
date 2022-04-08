@@ -57,11 +57,9 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Controllers
             if (!_clientRepository.ClientExists(id))
                 return NotFound($"Client with Id = {id} not found");
 
-            //Client clientToUpdate = _mapper.Map<Client>(client);
-
             var clientToUpdate = await _clientRepository.GetClientByIdAsync(id);
 
-            clientToUpdate.Birthday = client.Birthday;
+            _mapper.Map(client, clientToUpdate);
 
             _clientRepository.Update(clientToUpdate);
 
