@@ -87,5 +87,14 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Managers
         {
             return _context.Users.Any(e => e.Id == id);
         }
+
+        public async Task<IEnumerable<MembersNamesDto>> GetMembersNamesAsync()
+        {
+            var clientsNames = await _context.Users
+                .ProjectTo<MembersNamesDto>(_mapper.ConfigurationProvider)
+                .ToListAsync();
+
+            return clientsNames;
+        }
     }
 }

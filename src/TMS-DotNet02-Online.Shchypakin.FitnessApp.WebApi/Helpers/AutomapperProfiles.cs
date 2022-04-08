@@ -9,6 +9,7 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Helpers
         public AutomapperProfiles()
         {
             CreateMap<Client, MemberDto>();
+            CreateMap<Client, MembersNamesDto>();
             CreateMap<FromClientMemberDto, Client>();
             CreateMap<Membership, MembershipDto>();
             CreateMap<Membership, FromClientMembershipDto>();

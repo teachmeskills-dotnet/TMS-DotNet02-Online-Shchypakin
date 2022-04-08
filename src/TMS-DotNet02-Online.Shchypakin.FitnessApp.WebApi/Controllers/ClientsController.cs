@@ -23,12 +23,23 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Controllers
             _mapper = mapper;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MemberDto>>> GetClients()
         {
             var clients = await _clientRepository.GetMembersAsync();
             return Ok(clients);
         }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet("ClientsNames")]
+        public async Task<ActionResult<IEnumerable<MemberDto>>> GetClientsNames()
+        {
+            var clientsNames = await _clientRepository.GetMembersNamesAsync();
+            return Ok(clientsNames);
+        }
+
+
 
         //[Authorize]
         //[HttpGet("{id}")]
@@ -45,14 +56,26 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Controllers
             return client;
         }
 
+        [Authorize(Roles = "Admin")]
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<MemberDto>> GetClientById(int id)
+        {
+            if (!_clientRepository.ClientExists(id))
+                return NotFound($"Client with Id = {id} not found");
+
+            var client = await _clientRepository.GetClientByIdAsync(id);
+
+            var clientToSend = _mapper.Map<MemberDto>(client);
+
+            return clientToSend;
+        }
+
         [Authorize]
         [HttpPut("{id:int}")]
         public async Task<ActionResult<Client>> UpdateClient(int id, FromClientMemberDto client)
         {
             if (id != client.Id)
                 return BadRequest("Client ID mismatch");
-
-            
 
             if (!_clientRepository.ClientExists(id))
                 return NotFound($"Client with Id = {id} not found");

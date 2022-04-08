@@ -23,6 +23,8 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Interfaces
 
         Task<IEnumerable<MemberDto>> GetMembersAsync();
 
+        Task<IEnumerable<MembersNamesDto>> GetMembersNamesAsync();
+
         bool ClientExists(int id);
 
     }

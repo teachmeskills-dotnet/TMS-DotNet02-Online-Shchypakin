@@ -1,1 +1,12 @@
 <p>member-list works!</p>
+<div class="form-group">
+    <label>Users</label>
+    
+    <select class="form-control">
+        <option *ngFor="let user of membersNames" [value]="user.fullName">
+            {{user.fullName}}
+        </option>
+    </select>
+
+   
+</div>
