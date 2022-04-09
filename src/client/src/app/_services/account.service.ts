@@ -46,6 +46,7 @@ export class AccountService {
 
   logout()  {
     localStorage.removeItem('user');
+    localStorage.removeItem('member');
     this.currentUserSource.next(null);
   }
 }

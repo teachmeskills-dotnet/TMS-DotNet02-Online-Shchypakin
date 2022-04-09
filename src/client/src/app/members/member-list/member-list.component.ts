@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, ReplaySubject } from 'rxjs';
 import { MemberName } from 'src/app/_models/memberName';
 import { MembersService } from 'src/app/_services/members.service';
 import { map, startWith } from 'rxjs/operators';
+import { Member } from 'src/app/_models/members';
+import { Membership } from 'src/app/_models/membership';
+import { MembershipType } from 'src/app/_models/membershipType';
+import { MembershipSize } from 'src/app/_models/membershipSize';
 
 @Component({
   selector: 'app-member-list',
@@ -15,19 +19,24 @@ export class MemberListComponent implements OnInit {
   name: MemberName;
   myControl = new FormControl();
   autoFilter: Observable<string[]>;
-  //Items: string[] = ['BoJack Horseman', 'Stranger Things', 'Ozark', 'Big Mouth'];
-
+  selectedMember: Member;
+  membership: Membership;
+  membershypType: MembershipType;
+  membershipSize: MembershipSize;
+  
   constructor(private memberService: MembersService) { }
 
   ngOnInit(): void { 
     this.loadMembers();
-    
+    const member: Member = JSON.parse(localStorage.getItem('member'));
+    if(member) {
+      this.selectedMember = member;
+    }  
   }
 
-  private mat_filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    return this.membersNames.map(name => name.fullName).filter(option => option.toLowerCase().includes(filterValue));
-    //return this.Items.filter(option => option.toLowerCase().includes(filterValue));
+  private mat_filter(value: string): string[] {                                            //.indexOf(filterValue) === 0);
+    const filterValue = value.toLowerCase();                                               //.includes(filterValue));
+    return this.membersNames.map(name => name.fullName).filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }  
 
   loadMembers() {
@@ -45,6 +54,23 @@ export class MemberListComponent implements OnInit {
 
   displayFn(memberName: MemberName) {
     return memberName ? memberName.fullName : undefined;
+  }
+
+  onShowClick() {
+    this.getSelectedId();
+    this.memberService.getMemberById(this.getSelectedId()).subscribe(member => {
+      this.selectedMember = member; 
+      localStorage.setItem('member', JSON.stringify(member));
+    });
+  }
+
+  getSelectedId(): number {
+    const selectedName: string = this.myControl.value;
+    return this.membersNames.find(option => option.fullName === selectedName).id;
+  }
+
+  testClick() {
+    console.log(this.selectedMember);
   }
 
 }

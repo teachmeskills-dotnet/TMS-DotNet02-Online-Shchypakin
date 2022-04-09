@@ -1,29 +1,41 @@
 <p>member-list works!</p>
-<div class="form-group">
-  <!--  <label>Users</label>
-   
-    <select class="form-control">
-        <option *ngFor="let user of membersNames" [value]="user.fullName">
-            {{user.fullName}}
-        </option>
-    </select>
-
-    <ng-autocomplete>
-        <option *ngFor="let user of membersNames" [value]="user.fullName"> [displayWith]="displayFn"
-            {{user.fullName}}
-        </option>
-    </ng-autocomplete>
-
-    [(ngModel)]="name.fullName"    <button class="btn btn-secondary mr-2" (click)="cancel()" type="button">Cancel</button>
-  --> 
-  
- <mat-form-field style="width: 300px; display: block;">
-    <input type="text" placeholder="Enter name" matInput [matAutocomplete]="auto" [formControl] = "myControl" (click)="onInputClick()">
-       <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" >
-        <mat-option *ngFor="let user of autoFilter | async" [value]="user">
-            {{user}}
-        </mat-option>
-    </mat-autocomplete>
- </mat-form-field>
-
+<div class="d-flex flex-row"> 
+    <div class="d-flex flex-row">  
+        <mat-form-field style="width: 300px; display: block;">
+            <input type="text" placeholder="Enter name" matInput [matAutocomplete]="auto" [formControl] = "myControl" 
+                (click)="onInputClick()">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" >
+                <mat-option *ngFor="let user of autoFilter | async" [value]="user">
+                    {{user}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+        <button class="btn btn-success ml-2" type="button" style="height: 5ex;" (click)="onShowClick()">Show </button>
+        
+        <div class="row justify-content-center ml-5">
+            <h1 class="text-center text-default" *ngIf="selectedMember">{{selectedMember.fullName}}</h1>
+            <h1 class="text-center text-default" *ngIf="!selectedMember">Member</h1>
+            <hr>
+            <div class="container" style="margin-top: 20px">
+                <div class="row" *ngIf="selectedMember">
+                    <div class="col-20">
+                        <div class="card">
+                            <div class="card-body">
+                                <div>
+                                    <strong>Birthday:</strong>
+                                    <p>{{selectedMember.birthday}}</p>
+                                </div>
+                                <div>
+                                    <strong>Phone:</strong>
+                                    <p>{{selectedMember.phoneNumber}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>          
 </div>
+
+
