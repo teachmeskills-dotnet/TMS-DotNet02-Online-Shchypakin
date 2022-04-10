@@ -21,7 +21,7 @@ import { LoginComponent } from './login/login.component';
 import { ToastrModule } from 'ngx-toastr';
 import { ReactiveFormsModule } from '@angular/forms';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
-
+import { TabsModule } from 'ngx-bootstrap/tabs';
 
 @NgModule({
   declarations: [
@@ -48,7 +48,8 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
     BsDropdownModule.forRoot(),
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right'
-    })
+    }),
+    TabsModule.forRoot()
   ],
   
   providers: [

@@ -65,6 +65,30 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Controllers
 
             var client = await _clientRepository.GetClientByIdAsync(id);
 
+            DateTime lastVisit = DateTime.MinValue;
+
+            foreach(var membership in client.Memberships)
+            {
+                foreach(var record in membership.MembershipHistoryRecords)
+                {
+                    if(record.Date > lastVisit)
+                    {
+                        lastVisit = record.Date;
+                    }
+                }
+            }
+
+            client.LastVisit = lastVisit;
+
+            var memberships = client.Memberships.Where(m => m.End > DateTime.UtcNow).ToList();
+
+            foreach(var membership in memberships)
+            {
+                membership.VisitsLeft = membership.MembershipSize.Count - membership.MembershipHistoryRecords.Count;
+            }
+
+            client.Memberships = memberships;
+            
             var clientToSend = _mapper.Map<MemberDto>(client);
 
             return clientToSend;
@@ -80,7 +104,7 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Controllers
             if (!_clientRepository.ClientExists(id))
                 return NotFound($"Client with Id = {id} not found");
 
-            var clientToUpdate = await _clientRepository.GetClientByIdAsync(id);
+            var clientToUpdate = await _clientRepository.GetRawClientByIdAsync(id);
 
             _mapper.Map(client, clientToUpdate);
 

@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Collections.Generic;
 
 namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Dto
 {
@@ -18,6 +18,10 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Dto
         public MembershipTypeDto MembershipType { get; set; }
 
         public MembershipSizeDto MembershipSize { get; set; }
+
+        public int VisitsLeft { get; set; }
+
+        public ICollection<MembershypHistoryRecordsDto> MembershipHistoryRecords { get; set; }
 
         public bool IsActive { get; set; }
     }

@@ -24,7 +24,7 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpPost("Add")]
-        public async Task<ActionResult<MembershipDto>> Add(FromClientMembershipDto membership)
+        public async Task<ActionResult<MembershipDto>> Add(MembershipToAdd membership)
         {
             if (!_clientRepository.ClientExists(membership.ClientId))
                 return NotFound($"Client with Id = {membership.ClientId} not found");

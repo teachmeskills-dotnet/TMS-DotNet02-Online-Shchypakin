@@ -15,7 +15,9 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Interfaces
 
         Task<IEnumerable<Client>> GetClientsAsync();
 
-        Task<Client> GetClientByIdAsync(int id);
+        Task<MemberDto> GetClientByIdAsync(int id);
+
+        Task<Client> GetRawClientByIdAsync(int id);
 
         Task<Client> GetClientByClientNameAsync(string clientName);
 

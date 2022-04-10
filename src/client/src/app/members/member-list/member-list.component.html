@@ -1,33 +1,46 @@
 <p>member-list works!</p>
-<div class="d-flex flex-row"> 
-    <div class="d-flex flex-row">  
-        <mat-form-field style="width: 300px; display: block;">
-            <input type="text" placeholder="Enter name" matInput [matAutocomplete]="auto" [formControl] = "myControl" 
-                (click)="onInputClick()">
-            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" >
-                <mat-option *ngFor="let user of autoFilter | async" [value]="user">
-                    {{user}}
-                </mat-option>
-            </mat-autocomplete>
-        </mat-form-field>
-        <button class="btn btn-success ml-2" type="button" style="height: 5ex;" (click)="onShowClick()">Show </button>
-        
-        <div class="row justify-content-center ml-5">
-            <h1 class="text-center text-default" *ngIf="selectedMember">{{selectedMember.fullName}}</h1>
-            <h1 class="text-center text-default" *ngIf="!selectedMember">Member</h1>
-            <hr>
+<div class="row">
+    <div class="col-4">  
+        <div class="d-flex flex-row">             
+            <mat-form-field style="width: 100%; display: block;">
+                <input type="text" placeholder="Фамилия" matInput [matAutocomplete]="auto" [formControl] = "myControl" 
+                    (click)="onInputClick()">
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" >
+                    <mat-option *ngFor="let user of autoFilter | async" [value]="user">
+                        {{user}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+            <button class="btn btn-success ml-2" type="button" style="height: 5ex;" (click)="onShowClick()">Показать</button>                                
+        </div>
+        <div class="row justify-content-center mt-2">   
             <div class="container" style="margin-top: 20px">
                 <div class="row" *ngIf="selectedMember">
-                    <div class="col-20">
+                    <div class="col-12">
                         <div class="card">
                             <div class="card-body">
+                                <h2 class="text-center text-default" *ngIf="selectedMember">{{selectedMember.fullName}}</h2>
+                                <h2 class="text-center text-default" *ngIf="!selectedMember">Member</h2>
+                                <hr>
                                 <div>
-                                    <strong>Birthday:</strong>
+                                    <strong>День рождения:</strong>
                                     <p>{{selectedMember.birthday}}</p>
                                 </div>
                                 <div>
-                                    <strong>Phone:</strong>
+                                    <strong>Номер телефона:</strong>
                                     <p>{{selectedMember.phoneNumber}}</p>
+                                </div>
+                                <div>
+                                    <strong>Дата последнего посещения:</strong>
+                                    <p>{{selectedMember.lastVisit}}</p>
+                                </div>
+                                <div>
+                                    <strong>Email:</strong>
+                                    <p>{{selectedMember.email}}</p>
+                                </div>
+                                <div>
+                                    <strong>Комментарий:</strong>
+                                    <p>{{selectedMember.comment}}</p>
                                 </div>
                             </div>
                         </div>
@@ -35,7 +48,50 @@
                 </div>
             </div>
         </div>
-    </div>          
-</div>
-
+    </div>
+    <div class="col-8">
+        <div class="row justify-content-center">
+            <tabset class="member-tabset">
+                <tab heading="Актуальное">
+                    <h2>Действующие абонементы</h2>
+                    <div class="showMemberships" *ngIf="selectedMember">
+                        <div *ngFor="let membership of selectedMember.memberships" [value] ="membership"> 
+                            <div class="card">
+                                <div class="card-body">
+                                    <h2>
+                                        {{membership.membershipType.type}} {{membership.membershipSize.count}}
+                                    </h2>
+                                    <hr>
+                                    <div class="parent">
+                                        <div class="child flex-child">
+                                            <h3>
+                                                Дата начала: {{membership.start}}
+                                            </h3>
+                                            <h3>
+                                                Дата окончания: {{membership.end}}
+                                            </h3>
+                                            <h3>
+                                                Осталось занятий: {{membership.visitsLeft}}
+                                            </h3>
+                                        </div>                                   
+                                        <div class="child flex-child">
+                                            <label>Даты посещений</label>
+                                            <select class="form-control">
+                                                <option *ngFor="let record of membership.membershipHistoryRecords" [value]="record.date">
+                                                    {{record.date}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>   
+                                </div>
+                            </div>                      
+                        </div>
+                    </div>
+                </tab>
+            </tabset>
+        </div>
+    </div>
+</div>       
+        
+    
 

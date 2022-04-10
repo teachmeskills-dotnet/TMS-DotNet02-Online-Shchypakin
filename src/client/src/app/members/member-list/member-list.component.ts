@@ -8,6 +8,7 @@ import { Member } from 'src/app/_models/members';
 import { Membership } from 'src/app/_models/membership';
 import { MembershipType } from 'src/app/_models/membershipType';
 import { MembershipSize } from 'src/app/_models/membershipSize';
+import { MembershipHistoryRecord } from 'src/app/_models/membershipHistoryRecord';
 
 @Component({
   selector: 'app-member-list',

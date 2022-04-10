@@ -50,5 +50,7 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Managers
             
             return membership;
         }
+
+        
     }
 }

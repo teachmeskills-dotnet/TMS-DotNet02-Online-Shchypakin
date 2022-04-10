@@ -31,9 +31,10 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Managers
                 .SingleOrDefaultAsync(x => x.Fullname == clientName);
         }
 
-        public async Task<Client> GetClientByIdAsync(int id)
-        {
-            return await _context.Users.FindAsync(id);
+        public async Task<MemberDto> GetClientByIdAsync(int id)
+        {          
+            var users = await _context.Users.ProjectTo<MemberDto>(_mapper.ConfigurationProvider).ToListAsync();
+            return users.Where(x => x.Id == id).SingleOrDefault();
         }
 
         public async Task<IEnumerable<Client>> GetClientsAsync()
@@ -58,7 +59,7 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Managers
             
             
             var clients = await _context.Users
-                .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)              
+                .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
                 .ToListAsync();
 
             var clientsToSend = clients.Select(c => new MemberDto
@@ -95,6 +96,11 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Managers
                 .ToListAsync();
 
             return clientsNames;
+        }
+
+        public async Task<Client> GetRawClientByIdAsync(int id)
+        {
+            return await _context.Users.FindAsync(id);
         }
     }
 }
