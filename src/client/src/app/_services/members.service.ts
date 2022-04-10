@@ -1,10 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { MemberName } from '../_models/memberName';
 import { Member } from '../_models/members';
+import { MembershipHistoryRecord } from '../_models/membershipHistoryRecord';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,13 @@ export class MembersService {
 
   getMemberById(id: number) {
     return this.http.get<Member>(this.baseUrl + 'apiClients/' + id);
+  }
+
+  postRecord(record: MembershipHistoryRecord) {
+    //apiHistoryRecord/Add
+    return this.http.post<MembershipHistoryRecord>(this.baseUrl + 'apiHistoryRecord/Add', record).pipe(
+      
+    );
   }
   
 }

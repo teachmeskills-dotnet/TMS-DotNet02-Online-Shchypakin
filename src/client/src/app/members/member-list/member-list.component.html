@@ -11,7 +11,7 @@
                     </mat-option>
                 </mat-autocomplete>
             </mat-form-field>
-            <button class="btn btn-success ml-2" type="button" style="height: 5ex;" (click)="onShowClick()">Показать</button>                                
+            <button class="btn btn-success ml-2" type="button" style="height: 5ex;" (click)="onShowClick()">Выбрать</button>                                
         </div>
         <div class="row justify-content-center mt-2">   
             <div class="container" style="margin-top: 20px">
@@ -73,6 +73,14 @@
                                             <h3>
                                                 Осталось занятий: {{membership.visitsLeft}}
                                             </h3>
+                                            <button type="button" class="btn btn-primary" (click)="isCollapsed = !isCollapsed"
+                                                    [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">Показать даты посещений
+                                            </button>
+                                            <hr>
+                                            <div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true">
+                                                <div class="well well-lg card card-block card-header"
+                                                *ngFor="let record of membership.membershipHistoryRecords" [value]="record.date">{{record.date}}</div>
+                                            </div>
                                         </div>                                   
                                         <div class="child flex-child">
                                             <label>Даты посещений</label>
@@ -81,6 +89,8 @@
                                                     {{record.date}}
                                                 </option>
                                             </select>
+                                            <button class="btn btn-primary mt-2" type="button" style="height: 5ex;" 
+                                                (click)="registerVisit(membership.id)">Отметить посещение</button>
                                         </div>
                                     </div>   
                                 </div>
@@ -92,6 +102,8 @@
         </div>
     </div>
 </div>       
-        
+<div *ngFor="let alert of alerts">
+    <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout">{{ alert.msg }}</alert>
+</div>     
     
 

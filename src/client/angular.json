@@ -10,9 +10,9 @@
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
-        "build": {               
+        "build": {
           "builder": "@angular-devkit/build-angular:browser",
-          "options": {           
+          "options": {
             "outputPath": "dist/client",
             "index": "src/index.html",
             "main": "src/main.ts",

@@ -9,6 +9,8 @@ import { Membership } from 'src/app/_models/membership';
 import { MembershipType } from 'src/app/_models/membershipType';
 import { MembershipSize } from 'src/app/_models/membershipSize';
 import { MembershipHistoryRecord } from 'src/app/_models/membershipHistoryRecord';
+import { AlertComponent } from 'ngx-bootstrap/alert';
+
 
 @Component({
   selector: 'app-member-list',
@@ -24,7 +26,10 @@ export class MemberListComponent implements OnInit {
   membership: Membership;
   membershypType: MembershipType;
   membershipSize: MembershipSize;
-  
+  membershipHistoryRecord: MembershipHistoryRecord;
+  alerts: any[] = [{}];
+  isCollapsed = true;
+
   constructor(private memberService: MembersService) { }
 
   ngOnInit(): void { 
@@ -58,6 +63,10 @@ export class MemberListComponent implements OnInit {
   }
 
   onShowClick() {
+    this.setSelectedMember();
+  }
+
+  setSelectedMember() {
     this.getSelectedId();
     this.memberService.getMemberById(this.getSelectedId()).subscribe(member => {
       this.selectedMember = member; 
@@ -72,6 +81,27 @@ export class MemberListComponent implements OnInit {
 
   testClick() {
     console.log(this.selectedMember);
+  }
+
+  registerVisit(membershipId: number) {
+    const record :MembershipHistoryRecord = {} as MembershipHistoryRecord; 
+    record.date = new Date();
+    record.membershipId = membershipId;
+
+    this.memberService.postRecord(record).subscribe(r => {
+      this.membershipHistoryRecord = r;
+      this.setSelectedMember();
+      this.fireVisitRegisterSuccess(); 
+        
+    })
+  }
+
+  fireVisitRegisterSuccess(): void {
+    this.alerts.push({
+      type: 'success',
+      msg: `Посещение отмечено: ${new Date().toLocaleTimeString()}`,
+      timeout: 5000
+    });
   }
 
 }

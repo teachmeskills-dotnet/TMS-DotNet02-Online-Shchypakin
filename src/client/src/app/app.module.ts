@@ -22,6 +22,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { ReactiveFormsModule } from '@angular/forms';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { AlertModule } from 'ngx-bootstrap/alert';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right'
     }),
-    TabsModule.forRoot()
+    TabsModule.forRoot(),
+    AlertModule.forRoot(),
+    CollapseModule.forRoot()
   ],
   
   providers: [
