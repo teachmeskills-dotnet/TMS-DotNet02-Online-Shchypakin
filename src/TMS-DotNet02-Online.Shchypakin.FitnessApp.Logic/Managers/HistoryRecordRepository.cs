@@ -47,5 +47,20 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Managers
         {
             return _context.Memberships.Any(e => e.Id == id);
         }
+
+        public async Task<bool> Remove(int id)
+        {
+            var recordToRemove = await _context.MembershipHistoryRecords.FindAsync(id);
+
+            _context.MembershipHistoryRecords.Remove(recordToRemove);
+
+            return await _context.SaveChangesAsync() > 0;
+
+        }
+
+        public bool MembershipHistoryExists(int id)
+        {
+            return _context.MembershipHistoryRecords.Any(e => e.Id == id);
+        }
     }
 }

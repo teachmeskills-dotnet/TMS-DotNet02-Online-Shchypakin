@@ -37,6 +37,22 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Controllers
             return BadRequest("Failed to add");
         }
 
+        [Authorize(Roles = "Admin")]
+        [HttpDelete("delete/{id:int}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            if (!_recordRepository.MembershipHistoryExists(id))
+                return NotFound("Такой записи в базе не существует");
 
+
+            if(await _recordRepository.Remove(id))
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest("Не удалось удалить запись");
+            }
+        }
     }
 }

@@ -1,0 +1,39 @@
+<div class="card mb-2">
+    <div class="card-body">
+        <h2>
+            {{membership.membershipType.type}} {{membership.membershipSize.count}}
+        </h2>
+        <hr>
+        <div class="parent">
+            <div class="child flex-child">
+                <h3>
+                    Дата начала: {{membership.start | date}}
+                </h3>
+                <h3>
+                    Дата окончания: {{membership.end | date}}
+                </h3>
+                <h3>
+                    Осталось занятий: {{membership.visitsLeft}}
+                </h3>
+                <button type="button" class="btn btn-primary" (click)="isCollapsed = !isCollapsed"
+                        [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">Показать даты посещений
+                </button>
+                <hr>
+                <div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="false"
+                    *ngFor="let record of records$ | async" [value]="record.date">
+                    <div class="parent">
+                        <div class="child flex-child">
+                            <div class="well well-lg card card-block card-header">{{record.date | date}}</div>
+                        </div>
+                        <div class="child flex-child">
+                            <button class="btn btn-danger mt-2" type="button" 
+                                    (click)="onRemoveClick(record.id)">Удалить</button>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            <button class="btn btn-success mt-2" type="button" style="height: 5ex;" 
+                    (click)="onAddClick()">Отметить посещение</button>                                  
+        </div>   
+    </div>
+</div>  

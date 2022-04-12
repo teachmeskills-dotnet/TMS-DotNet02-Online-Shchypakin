@@ -24,6 +24,7 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { MembershipCardsComponent } from './membership-cards/membership-cards.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
     MemberDetailComponent,
     ListsComponent,
     MessagesComponent,
-    LoginComponent
+    LoginComponent,
+    MembershipCardsComponent
   ],
   imports: [
     BrowserModule,

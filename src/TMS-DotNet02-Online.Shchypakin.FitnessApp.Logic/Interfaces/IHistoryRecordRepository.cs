@@ -17,6 +17,10 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Interfaces
 
         Task<MembershipHistoryRecord> Add(MembershipHistoryRecord record);
 
+        Task<bool> Remove(int id);
+
         bool MembershipExists(int id);
+
+        bool MembershipHistoryExists(int id);
     }
 }

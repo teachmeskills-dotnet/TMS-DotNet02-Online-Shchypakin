@@ -10,6 +10,7 @@ import { MembershipType } from 'src/app/_models/membershipType';
 import { MembershipSize } from 'src/app/_models/membershipSize';
 import { MembershipHistoryRecord } from 'src/app/_models/membershipHistoryRecord';
 import { AlertComponent } from 'ngx-bootstrap/alert';
+//import { Observable } from 'rxjs/internal/Observable';
 
 
 @Component({
@@ -29,6 +30,9 @@ export class MemberListComponent implements OnInit {
   membershipHistoryRecord: MembershipHistoryRecord;
   alerts: any[] = [{}];
   isCollapsed = true;
+  private currentMemberSource = new ReplaySubject<Member>(1);
+  currentMember$ = this.currentMemberSource.asObservable();
+
 
   constructor(private memberService: MembersService) { }
 
@@ -36,7 +40,8 @@ export class MemberListComponent implements OnInit {
     this.loadMembers();
     const member: Member = JSON.parse(localStorage.getItem('member'));
     if(member) {
-      this.selectedMember = member;
+      //this.selectedMember = member;
+      this.setSelectedMember(member.id);
     }  
   }
 
@@ -63,12 +68,11 @@ export class MemberListComponent implements OnInit {
   }
 
   onShowClick() {
-    this.setSelectedMember();
+    this.setSelectedMember(this.getSelectedId());
   }
 
-  setSelectedMember() {
-    this.getSelectedId();
-    this.memberService.getMemberById(this.getSelectedId()).subscribe(member => {
+  setSelectedMember(id: number) {   
+    this.memberService.getMemberById(id).subscribe(member => {
       this.selectedMember = member; 
       localStorage.setItem('member', JSON.stringify(member));
     });
@@ -79,20 +83,23 @@ export class MemberListComponent implements OnInit {
     return this.membersNames.find(option => option.fullName === selectedName).id;
   }
 
-  testClick() {
-    console.log(this.selectedMember);
-  }
 
   registerVisit(membershipId: number) {
     const record :MembershipHistoryRecord = {} as MembershipHistoryRecord; 
     record.date = new Date();
     record.membershipId = membershipId;
-
+    console.log(record);
+    console.log(this.memberService);
     this.memberService.postRecord(record).subscribe(r => {
-      this.membershipHistoryRecord = r;
-      this.setSelectedMember();
-      this.fireVisitRegisterSuccess(); 
-        
+      this.membershipHistoryRecord = r;    
+      this.setSelectedMember(this.selectedMember.id);
+      this.fireVisitRegisterSuccess();         
+    })
+  }
+
+  deleteRecord(recordId: number) {
+    this.memberService.deleteRecord(recordId).subscribe(r =>{
+      this.setSelectedMember(this.selectedMember.id);
     })
   }
 

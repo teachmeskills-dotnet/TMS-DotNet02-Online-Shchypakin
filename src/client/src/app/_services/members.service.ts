@@ -31,5 +31,11 @@ export class MembersService {
       
     );
   }
+
+  deleteRecord(id: number) {
+    return this.http.delete<MembershipHistoryRecord>(this.baseUrl + 'apiHistoryRecord/delete/' + id).pipe(
+
+    );
+  }
   
 }

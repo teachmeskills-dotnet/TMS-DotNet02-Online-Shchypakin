@@ -24,7 +24,7 @@
                                 <hr>
                                 <div>
                                     <strong>День рождения:</strong>
-                                    <p>{{selectedMember.birthday}}</p>
+                                    <p>{{selectedMember.birthday | date}}</p>
                                 </div>
                                 <div>
                                     <strong>Номер телефона:</strong>
@@ -32,7 +32,7 @@
                                 </div>
                                 <div>
                                     <strong>Дата последнего посещения:</strong>
-                                    <p>{{selectedMember.lastVisit}}</p>
+                                    <p>{{selectedMember.lastVisit | date}}</p>
                                 </div>
                                 <div>
                                     <strong>Email:</strong>
@@ -56,54 +56,32 @@
                     <h2>Действующие абонементы</h2>
                     <div class="showMemberships" *ngIf="selectedMember">
                         <div *ngFor="let membership of selectedMember.memberships" [value] ="membership"> 
-                            <div class="card">
-                                <div class="card-body">
-                                    <h2>
-                                        {{membership.membershipType.type}} {{membership.membershipSize.count}}
-                                    </h2>
-                                    <hr>
-                                    <div class="parent">
-                                        <div class="child flex-child">
-                                            <h3>
-                                                Дата начала: {{membership.start}}
-                                            </h3>
-                                            <h3>
-                                                Дата окончания: {{membership.end}}
-                                            </h3>
-                                            <h3>
-                                                Осталось занятий: {{membership.visitsLeft}}
-                                            </h3>
-                                            <button type="button" class="btn btn-primary" (click)="isCollapsed = !isCollapsed"
-                                                    [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">Показать даты посещений
-                                            </button>
-                                            <hr>
-                                            <div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true">
-                                                <div class="well well-lg card card-block card-header"
-                                                *ngFor="let record of membership.membershipHistoryRecords" [value]="record.date">{{record.date}}</div>
-                                            </div>
-                                        </div>                                   
-                                        <div class="child flex-child">
-                                            <label>Даты посещений</label>
-                                            <select class="form-control">
-                                                <option *ngFor="let record of membership.membershipHistoryRecords" [value]="record.date">
-                                                    {{record.date}}
-                                                </option>
-                                            </select>
-                                            <button class="btn btn-primary mt-2" type="button" style="height: 5ex;" 
-                                                (click)="registerVisit(membership.id)">Отметить посещение</button>
-                                        </div>
-                                    </div>   
-                                </div>
-                            </div>                      
+                            <app-membership-cards [membership]="membership" (parentFun)="registerVisit($event)"
+                                (parentRemoveFun)="deleteRecord($event)"></app-membership-cards>                      
                         </div>
                     </div>
+                </tab>
+                <tab heading="Назначить">
+
+                </tab>
+                <tab heading="История">
+                    <h2>Завершенные абонементы</h2>
+                    <div class="showMemberships" *ngIf="selectedMember">
+                        <div *ngFor="let membership of selectedMember.memberships" [value] ="membership"> 
+                            <app-membership-cards [membership]="membership" (parentFun)="registerVisit($event)"
+                                (parentRemoveFun)="deleteRecord($event)"></app-membership-cards>                      
+                        </div>
+                    </div>
+                </tab>
+                <tab heading="Создание нового абонемента">
+
                 </tab>
             </tabset>
         </div>
     </div>
 </div>       
 <div *ngFor="let alert of alerts">
-    <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout">{{ alert.msg }}</alert>
+    <alert class="fixed-bottom" [type]="alert.type" [dismissOnTimeout]="alert.timeout">{{ alert.msg }}</alert>
 </div>     
     
 
