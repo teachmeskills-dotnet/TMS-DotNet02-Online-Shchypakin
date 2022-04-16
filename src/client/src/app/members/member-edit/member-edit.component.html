@@ -1,0 +1,83 @@
+<div class="row justify-content-center mt-2">   
+    <div class="container" style="margin-top: 20px">
+        <div class="row" *ngIf="selectedMember">
+            <div class="col-4">
+                <h1>Информация о клиенте</h1>
+                <div class="row justify-content-center mt-2">   
+                    <div class="container" style="margin-top: 20px">
+                        <div class="row" *ngIf="selectedMember">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h2 class="text-center text-default" *ngIf="selectedMember">{{selectedMember.fullName}}</h2>
+                                        <h2 class="text-center text-default" *ngIf="!selectedMember">Member</h2>
+                                        <hr>
+                                        <div>
+                                            <strong>День рождения:</strong>
+                                            <p>{{selectedMember.birthday | date}}</p>
+                                        </div>
+                                        <div>
+                                            <strong>Номер телефона:</strong>
+                                            <p>{{selectedMember.phoneNumber}}</p>
+                                        </div>
+                                        <div>
+                                            <strong>Дата последнего посещения:</strong>
+                                            <p>{{selectedMember.lastVisit | date}}</p>
+                                        </div>
+                                        <div>
+                                            <strong>Email:</strong>
+                                            <p>{{selectedMember.email}}</p>
+                                        </div>
+                                        <div>
+                                            <strong>Комментарий:</strong>
+                                            <p>{{selectedMember.comment}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="alert alert-info" *ngIf="editForm.dirty">
+                    <strong>Информация: </strong>все несохраненные изменения будут потеряны
+                </div>
+                <div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="text-center text-default">Клиент</h2>
+                            <hr>
+                            <form #editForm="ngForm" id="editForm" (ngSubmit)="updateMember()">
+                                <div>
+                                    <h4>Фамилия имя:</h4>
+                                    <input class="form-control" [(ngModel)]="selectedMember.fullName" type="text" class="form-control mb-2" name="fullName" 
+                                        placeholder="Например Тимошенко Юлия"> 
+                                    <h4 class="m-2">День рождения:</h4>
+                                    <input class="form-control" [(ngModel)]="selectedMember.birthday" type="date" class="form-control mb-2" name="birthday" placeholder="Дата"> 
+                                </div>
+                                <div>
+                                    <h4 class="m-2">Номер телефона:</h4>
+                                    <input class="form-control" [(ngModel)]="selectedMember.phoneNumber" type="text" class="form-control mb-2" name="phoneNumber" placeholder="Например 375291112233"> 
+                                </div>
+                                <div>
+                                    <h4 class="m-2">Email:</h4>
+                                    <input class="form-control" [(ngModel)]="selectedMember.email" type="text" class="form-control mb-2" name="email" placeholder="Например email@gmail.com">
+                                </div>
+                                <div>
+                                    <h4 class="m-2">Комментарий:</h4>                           
+                                    <textarea class="form-control" [(ngModel)]="selectedMember.comment" name="comment" rows="10"></textarea>
+                                </div>
+                            </form>
+                        </div>
+                        
+                    </div>
+                    <button [disabled]="!editForm.dirty" form="editForm" class="btn btn-success btn-blick mt-2" 
+                        type="submit" style="height: 5ex;" >Сохранить</button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+

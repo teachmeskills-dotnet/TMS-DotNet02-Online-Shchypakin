@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMS_DotNet02_Online.Shchypakin.FitnessApp.Data.Enities;
 using TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Dto;
@@ -13,13 +14,19 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Controllers
         private readonly IMembershipRepository _membershipRepository;
         private readonly IClientRepository _clientRepository;
         private readonly IMapper _mapper;
+        private readonly IMembershipSizeRepository _membershipSizeRepository;
+        private readonly IMembershipTypeRepository _membershipTypeRepository;
 
         public MembershipController(IMembershipRepository membershipRepository, 
-            IClientRepository clientRepository, IMapper mapper)
+            IClientRepository clientRepository, IMapper mapper, 
+            IMembershipSizeRepository membershipSizeRepository,
+            IMembershipTypeRepository membershipTypeRepository)
         {
             _membershipRepository = membershipRepository;
             _clientRepository = clientRepository;
             _mapper = mapper;
+            _membershipSizeRepository = membershipSizeRepository;
+            _membershipTypeRepository = membershipTypeRepository;
         }
 
         [Authorize(Roles = "Admin")]
@@ -38,6 +45,24 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Controllers
                 return _mapper.Map<MembershipDto>(membershipToSend);
             }
             return BadRequest("Failed to add");
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet("SizeType")]
+        public async Task<ActionResult<TypeSizeDto>> GetSizeType()
+        {
+            var membershipTypes = await _membershipTypeRepository.GetMemberShipTypesAsync();
+
+            var membershipSizes = await _membershipSizeRepository.GetMemberShipSizesAsync();
+
+            var typeSize = new TypeSizeDto()
+            {
+                Sizes = (ICollection<MembershipSizeDto>)membershipSizes,
+
+                Types = (ICollection<MembershipTypeDto>)membershipTypes
+            };
+
+            return Ok(typeSize);
         }
 
         [Authorize(Roles = "Admin")]

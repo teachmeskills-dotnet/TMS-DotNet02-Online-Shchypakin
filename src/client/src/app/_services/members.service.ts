@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { MemberName } from '../_models/memberName';
 import { Member } from '../_models/members';
 import { MembershipHistoryRecord } from '../_models/membershipHistoryRecord';
+import { MemberToSend } from '../_models/memberToSend';
 
 @Injectable({
   providedIn: 'root'
@@ -25,17 +26,9 @@ export class MembersService {
     return this.http.get<Member>(this.baseUrl + 'apiClients/' + id);
   }
 
-  postRecord(record: MembershipHistoryRecord) {
-    //apiHistoryRecord/Add
-    return this.http.post<MembershipHistoryRecord>(this.baseUrl + 'apiHistoryRecord/Add', record).pipe(
-      
-    );
-  }
 
-  deleteRecord(id: number) {
-    return this.http.delete<MembershipHistoryRecord>(this.baseUrl + 'apiHistoryRecord/delete/' + id).pipe(
-
-    );
+  putMember(member: MemberToSend) {
+    return this.http.put<MemberToSend>(this.baseUrl + 'apiClients/' + member.id,  member).pipe();
   }
   
 }

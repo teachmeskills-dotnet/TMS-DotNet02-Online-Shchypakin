@@ -10,6 +10,8 @@ import { MembershipType } from 'src/app/_models/membershipType';
 import { MembershipSize } from 'src/app/_models/membershipSize';
 import { MembershipHistoryRecord } from 'src/app/_models/membershipHistoryRecord';
 import { AlertComponent } from 'ngx-bootstrap/alert';
+import { ToastrService } from 'ngx-toastr';
+import { MembershipService } from 'src/app/_services/membership.service';
 //import { Observable } from 'rxjs/internal/Observable';
 
 
@@ -25,6 +27,7 @@ export class MemberListComponent implements OnInit {
   autoFilter: Observable<string[]>;
   selectedMember: Member;
   membership: Membership;
+  
   membershypType: MembershipType;
   membershipSize: MembershipSize;
   membershipHistoryRecord: MembershipHistoryRecord;
@@ -34,7 +37,8 @@ export class MemberListComponent implements OnInit {
   currentMember$ = this.currentMemberSource.asObservable();
 
 
-  constructor(private memberService: MembersService) { }
+  constructor(private memberService: MembersService, private membershipService: MembershipService, 
+    private toastr: ToastrService) { }
 
   ngOnInit(): void { 
     this.loadMembers();
@@ -90,19 +94,20 @@ export class MemberListComponent implements OnInit {
     record.membershipId = membershipId;
     console.log(record);
     console.log(this.memberService);
-    this.memberService.postRecord(record).subscribe(r => {
+    this.membershipService.postRecord(record).subscribe(r => {
       this.membershipHistoryRecord = r;    
       this.setSelectedMember(this.selectedMember.id);
-      this.fireVisitRegisterSuccess();         
+      //this.fireVisitRegisterSuccess();
+      this.toastr.success(`Посещение отмечено: ${new Date().toLocaleTimeString()}`) ;        
     })
   }
 
   deleteRecord(recordId: number) {
-    this.memberService.deleteRecord(recordId).subscribe(r =>{
+    this.membershipService.deleteRecord(recordId).subscribe(r =>{
       this.setSelectedMember(this.selectedMember.id);
     })
   }
-
+/*
   fireVisitRegisterSuccess(): void {
     this.alerts.push({
       type: 'success',
@@ -110,5 +115,5 @@ export class MemberListComponent implements OnInit {
       timeout: 5000
     });
   }
-
+*/
 }

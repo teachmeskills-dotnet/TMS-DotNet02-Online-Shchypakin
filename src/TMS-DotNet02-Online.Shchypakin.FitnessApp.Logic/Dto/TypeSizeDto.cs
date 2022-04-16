@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Dto
 {
-    public class MembershipSizeDto
+    public class TypeSizeDto
     {
-        public int Id { get; set; }
-        public int Count { get; set; }
+        public ICollection<MembershipTypeDto> Types { get; set; }
 
-        public string Comment { get; set; }
+        public ICollection<MembershipSizeDto> Sizes { get; set; }
     }
 }

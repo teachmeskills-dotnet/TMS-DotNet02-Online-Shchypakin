@@ -25,6 +25,10 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { MembershipCardsComponent } from './membership-cards/membership-cards.component';
+import { AssignMembershipComponent } from './assign-membership/assign-membership.component';
+import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
+
 
 @NgModule({
   declarations: [
@@ -37,7 +41,9 @@ import { MembershipCardsComponent } from './membership-cards/membership-cards.co
     ListsComponent,
     MessagesComponent,
     LoginComponent,
-    MembershipCardsComponent
+    MembershipCardsComponent,
+    AssignMembershipComponent,
+    MemberEditComponent
   ],
   imports: [
     BrowserModule,
@@ -55,9 +61,10 @@ import { MembershipCardsComponent } from './membership-cards/membership-cards.co
     }),
     TabsModule.forRoot(),
     AlertModule.forRoot(),
-    CollapseModule.forRoot()
+    CollapseModule.forRoot(),
+    BsDatepickerModule.forRoot()
   ],
-  
+
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
   ],
