@@ -48,32 +48,36 @@
                         <div class="card-body">
                             <h2 class="text-center text-default">Клиент</h2>
                             <hr>
-                            <form #editForm="ngForm" id="editForm" (ngSubmit)="updateMember()">
-                                <div>
+                            <form [formGroup]="editForm" index="editForm" (ngSubmit)="updateMember()" autocomplete="off">
+                                <div class="form-group">
                                     <h4>Фамилия имя:</h4>
-                                    <input class="form-control" [(ngModel)]="selectedMember.fullName" type="text" class="form-control mb-2" name="fullName" 
+                                    <input class="form-control mb-2" formControlName="fullName" type="text"
                                         placeholder="Например Тимошенко Юлия"> 
+                                </div>
+                                <div class="form-group">       
                                     <h4 class="m-2">День рождения:</h4>
-                                    <input class="form-control" [(ngModel)]="selectedMember.birthday" type="date" class="form-control mb-2" name="birthday" placeholder="Дата"> 
+                                    <app-date-input [formControl]='editForm.controls["birthday"]'></app-date-input>
+                                   <!-- <input class="form-control mb-2" formControlName="birthday" type="date" placeholder="Дата"> -->
                                 </div>
-                                <div>
+                                <div class="form-group">
                                     <h4 class="m-2">Номер телефона:</h4>
-                                    <input class="form-control" [(ngModel)]="selectedMember.phoneNumber" type="text" class="form-control mb-2" name="phoneNumber" placeholder="Например 375291112233"> 
+                                    <input class="form-control mb-2" formControlName="phoneNumber" type="text" placeholder="Например 375291112233"> 
                                 </div>
-                                <div>
+                                <div class="form-group">
                                     <h4 class="m-2">Email:</h4>
-                                    <input class="form-control" [(ngModel)]="selectedMember.email" type="text" class="form-control mb-2" name="email" placeholder="Например email@gmail.com">
+                                    <input class="form-control mb-2" formControlName="email" type="text"  placeholder="Например email@gmail.com">
                                 </div>
-                                <div>
+                                <div class="form-group">
                                     <h4 class="m-2">Комментарий:</h4>                           
-                                    <textarea class="form-control" [(ngModel)]="selectedMember.comment" name="comment" rows="10"></textarea>
+                                    <textarea class="form-control mb-2" formControlName="comment" rows="10"></textarea>
                                 </div>
+                                <button [disabled]="!editForm.dirty" class="btn btn-success btn-blick mt-2" 
+                                    type="submit" style="height: 5ex;" >Сохранить</button>
                             </form>
                         </div>
                         
                     </div>
-                    <button [disabled]="!editForm.dirty" form="editForm" class="btn btn-success btn-blick mt-2" 
-                        type="submit" style="height: 5ex;" >Сохранить</button>
+                    
                 </div>
             </div>
             

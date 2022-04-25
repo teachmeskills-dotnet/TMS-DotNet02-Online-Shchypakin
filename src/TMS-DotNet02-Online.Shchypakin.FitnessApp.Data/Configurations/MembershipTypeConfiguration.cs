@@ -20,6 +20,7 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Data.Configurations
             builder.Property(type => type.Type)
                 .IsRequired()
                 .HasMaxLength(SqlConfiguration.SqlMaxLengthShort);
+
         }
     }
 }

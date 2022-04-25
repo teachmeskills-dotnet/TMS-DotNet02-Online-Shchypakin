@@ -43,6 +43,7 @@ export class MemberListComponent implements OnInit {
   ngOnInit(): void { 
     this.loadMembers();
     const member: Member = JSON.parse(localStorage.getItem('member'));
+    
     if(member) {
       //this.selectedMember = member;
       this.setSelectedMember(member.id);
@@ -106,6 +107,10 @@ export class MemberListComponent implements OnInit {
     this.membershipService.deleteRecord(recordId).subscribe(r =>{
       this.setSelectedMember(this.selectedMember.id);
     })
+  }
+
+  addMembership() {
+    this.setSelectedMember(this.selectedMember.id);
   }
 /*
   fireVisitRegisterSuccess(): void {

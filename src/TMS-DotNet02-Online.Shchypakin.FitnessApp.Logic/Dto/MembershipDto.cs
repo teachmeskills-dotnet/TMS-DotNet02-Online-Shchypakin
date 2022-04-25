@@ -24,5 +24,7 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Dto
         public ICollection<MembershypHistoryRecordsDto> MembershipHistoryRecords { get; set; }
 
         public bool IsActive { get; set; }
+
+        public bool Online { get; set; }
     }
 }

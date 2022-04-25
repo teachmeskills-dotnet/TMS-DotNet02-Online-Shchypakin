@@ -17,14 +17,14 @@
             <div class="container" style="margin-top: 20px">
                 <div class="row" *ngIf="selectedMember">
                     <div class="col-12">
-                        <div class="card">
+                        <div class="card bg-light">
                             <div class="card-body">
                                 <h2 class="text-center text-default" *ngIf="selectedMember">{{selectedMember.fullName}}</h2>
                                 <h2 class="text-center text-default" *ngIf="!selectedMember">Member</h2>
                                 <hr>
                                 <div>
                                     <strong>День рождения:</strong>
-                                    <p>{{selectedMember.birthday | date}}</p>
+                                    <p>{{selectedMember.birthday | date: "dd MMMM YYYY"}}</p>
                                 </div>
                                 <div>
                                     <strong>Номер телефона:</strong>
@@ -32,7 +32,7 @@
                                 </div>
                                 <div>
                                     <strong>Дата последнего посещения:</strong>
-                                    <p>{{selectedMember.lastVisit | date}}</p>
+                                    <p>{{selectedMember.lastVisit | date: "dd MMMM YYYY"}}</p>
                                 </div>
                                 <div>
                                     <strong>Email:</strong>
@@ -56,7 +56,7 @@
             <tabset class="member-tabset">
                 <tab heading="Актуальное">
                     <h2>Действующие абонементы</h2>
-                    <div class="showMemberships" *ngIf="selectedMember">
+                    <div id="membershipCards" class="showMemberships" *ngIf="selectedMember">
                         <div *ngFor="let membership of selectedMember.memberships" [value] ="membership"> 
                             <app-membership-cards [membership]="membership" (parentFun)="registerVisit($event)"
                                 (parentRemoveFun)="deleteRecord($event)"></app-membership-cards>                      
@@ -65,8 +65,9 @@
                 </tab>
                 <tab heading="Назначить">
                     <h2>Новый абонемент</h2>
-                    <div *ngIf="selectedMember">
-                        <app-assign-membership [currentMemberId]="selectedMember.id"></app-assign-membership>
+                    <div *ngIf="selectedMember" >
+                        <app-assign-membership [currentMemberId]="selectedMember.id" 
+                            (parentFun)="addMembership($event)"></app-assign-membership>
                     </div>                   
                 </tab>
                 <tab heading="История">

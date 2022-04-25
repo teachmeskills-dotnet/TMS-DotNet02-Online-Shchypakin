@@ -11,5 +11,6 @@ export interface Membership {
     membershipSize: MembershipSize;
     visitsLeft: number;
     isActive: boolean;
+    online: boolean;
     membershipHistoryRecords: MembershipHistoryRecord[];
 }

@@ -33,6 +33,15 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Managers
             return membershipTypeToAdd;
         }
 
+        public async Task<A> GenericAddAsync<T, A>(T membershipType, DbSet<A> dbSet) where A : class
+        {
+            var itemToAdd = _mapper.Map<A>(membershipType);
+
+            await dbSet.AddAsync(itemToAdd);
+
+            return itemToAdd;
+        }
+
         public async Task<IEnumerable<MembershipTypeDto>> GetMemberShipTypesAsync()
         {
             var membershipTypes = await _context.MembershipTypes

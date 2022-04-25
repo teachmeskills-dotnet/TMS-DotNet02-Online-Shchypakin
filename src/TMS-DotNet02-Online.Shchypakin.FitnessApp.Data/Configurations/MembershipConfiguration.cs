@@ -32,6 +32,8 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Data.Configurations
 
             builder.Property(membership => membership.IsActive).IsRequired();
 
+            builder.Property(membership => membership.Online).IsRequired();
+
             builder.HasOne(membership => membership.Client)
                 .WithMany(client => client.Memberships)
                 .HasForeignKey(membership => membership.ClientId)

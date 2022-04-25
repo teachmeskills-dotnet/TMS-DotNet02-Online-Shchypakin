@@ -28,6 +28,8 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Data.Enities
 
         public bool IsActive { get; set; }
 
+        public bool Online { get; set; }
+
         public ICollection<MembershipHistoryRecord> MembershipHistoryRecords { get; set; }
     }
 }

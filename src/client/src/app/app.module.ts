@@ -28,6 +28,9 @@ import { MembershipCardsComponent } from './membership-cards/membership-cards.co
 import { AssignMembershipComponent } from './assign-membership/assign-membership.component';
 import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { TextInputComponent } from './_forms/text-input/text-input.component';
+import { DateInputComponent } from './_forms/date-input/date-input.component';
+import { EditMembershipComponent } from './edit-membership/edit-membership.component';
 
 
 @NgModule({
@@ -43,7 +46,10 @@ import { MemberEditComponent } from './members/member-edit/member-edit.component
     LoginComponent,
     MembershipCardsComponent,
     AssignMembershipComponent,
-    MemberEditComponent
+    MemberEditComponent,
+    TextInputComponent,
+    DateInputComponent,
+    EditMembershipComponent
   ],
   imports: [
     BrowserModule,

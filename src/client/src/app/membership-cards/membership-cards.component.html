@@ -1,16 +1,19 @@
-<div class="card mb-2">
+<div class="card bg-light mb-2">
     <div class="card-body">
-        <h2>
-            {{membership.membershipType.type}} {{membership.membershipSize.count}}
+        <h2 *ngIf="membership.online">
+            {{membership.membershipType.type}} {{membership.membershipSize.count}} Онлайн
+        </h2>
+        <h2 *ngIf="!membership.online">
+            {{membership.membershipType.type}} {{membership.membershipSize.count}} Оффлайн
         </h2>
         <hr>
         <div class="parent">
             <div class="child flex-child">
                 <h3>
-                    Дата начала: {{membership.start | date}}
+                    Дата начала: {{membership.start | date: "dd MMMM YYYY"}}
                 </h3>
                 <h3>
-                    Дата окончания: {{membership.end | date}}
+                    Дата окончания: {{membership.end | date: "dd MMMM YYYY"}}
                 </h3>
                 <h3>
                     Осталось занятий: {{membership.visitsLeft}}
@@ -23,7 +26,7 @@
                     *ngFor="let record of records$ | async" [value]="record.date">
                     <div class="parent">
                         <div class="child flex-child">
-                            <div class="well well-lg card card-block card-header">{{record.date | date}}</div>
+                            <div class="well well-lg card card-block card-header">{{record.date | date: "dd MMMM YYYY"}}</div>
                         </div>
                         <div class="child flex-child">
                             <button class="btn btn-danger mt-2" type="button" 

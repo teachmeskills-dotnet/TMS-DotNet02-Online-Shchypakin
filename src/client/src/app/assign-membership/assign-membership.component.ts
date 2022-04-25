@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Membership } from '../_models/membership';
 import { MembershipSize } from '../_models/membershipSize';
@@ -13,15 +14,19 @@ import { MembershipService } from '../_services/membership.service';
   styleUrls: ['./assign-membership.component.css']
 })
 export class AssignMembershipComponent implements OnInit {
+  assignForm: FormGroup;
   types: MembershipType[];
   sizes: MembershipSize[];
   selectedTypeId: number;
   selectedSizeId: number;
+  isOnline: boolean;
   membership: MembershipToSend = {} as MembershipToSend;
   @Input() currentMemberId: number;
+  @Output() parentFun: EventEmitter<any> = new EventEmitter();
 
-  constructor(private membershipService: MembershipService, private toastr: ToastrService) { 
-    //this.setInitialValues();
+  constructor(private membershipService: MembershipService, private toastr: ToastrService,
+    private fb: FormBuilder) { 
+    this.initializeForm();
   }
 
   ngOnInit(): void {
@@ -32,16 +37,30 @@ export class AssignMembershipComponent implements OnInit {
     })
   }
 
+  initializeForm() {
+    this.assignForm = new FormGroup({
+      clientId: new FormControl(),
+      start: new FormControl(),
+      end: new FormControl(),
+      online: new FormControl(),
+      membershipTypeId: new FormControl(),
+      membershipSizeId: new FormControl()
+      
+    })
+  }
+
   onAddClick() {
-    this.membership.clientId = this.currentMemberId;
+    //this.membership.clientId = this.currentMemberId;
+    this.assignForm.value.clientId = this.currentMemberId;
+    this.membership = this.assignForm.value;
+    this.membership.online = this.assignForm.value.online === 'true' ? true: false;
     this.membershipService.postMembership(this.membership).subscribe(m => {
       this.toastr.success(`Абонемент назначен: ${new Date().toLocaleTimeString()}`) ;
+      this.parentFun.emit();
+    }), (e => {
+      console.log(e);
     })
-    console.log(this.membership.clientId);
-    console.log(this.membership.start);
-    console.log(this.membership.membershipSizeId);
-    console.log(this.membership.membershipTypeId);
-    console.log(this.membership.end);   
+
   }
 
   setInitialValues() {

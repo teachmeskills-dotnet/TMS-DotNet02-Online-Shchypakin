@@ -4,6 +4,7 @@ import { Observable, Subscriber } from 'rxjs';
 import { Membership } from '../_models/membership';
 import { MembershipHistoryRecord } from '../_models/membershipHistoryRecord';
 import { MembersService } from '../_services/members.service';
+import {of} from 'rxjs';
 
 @Component({
   selector: 'app-membership-cards',
@@ -18,20 +19,28 @@ export class MembershipCardsComponent implements OnInit {
 @Output() parentFun: EventEmitter<number> = new EventEmitter();
 @Output() parentRemoveFun: EventEmitter<number> = new EventEmitter();
 
-records$: Observable<MembershipHistoryRecord>;
+records$: Observable<MembershipHistoryRecord[]>;
 
 isCollapsed = true;
 
   constructor() { }
 
   ngOnInit(): void {
-    if(this.membership.membershipHistoryRecords) {
+    /*if(this.membership.membershipHistoryRecords) {
       
       this.records$ = Observable.create((observer: Subscriber<any>) => {
         observer.next(this.membership.membershipHistoryRecords);
         observer.complete();
-    });
-    }
+      });
+    }*/
+    this.records$ = this.getRecords(this.membership.membershipHistoryRecords)
+  }
+
+  getRecords(records: MembershipHistoryRecord[]) {
+    if(records != null) 
+    {
+        return of(records);
+    } 
   }
 
   onAddClick() {

@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TMS_DotNet02_Online.Shchypakin.FitnessApp.Data.Context;
 
 namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220425164458_AddMembershipTypeOnline")]
+    partial class AddMembershipTypeOnline
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -253,9 +255,6 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Data.Migrations
                     b.Property<int>("MembershipTypeId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("Online")
-                        .HasColumnType("INTEGER");
-
                     b.Property<DateTime>("Start")
                         .HasColumnType("date");
 
@@ -311,6 +310,9 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("Online")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Type")
