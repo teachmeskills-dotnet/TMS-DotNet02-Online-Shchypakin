@@ -27,7 +27,7 @@ export class MemberListComponent implements OnInit {
   autoFilter: Observable<string[]>;
   selectedMember: Member;
   membership: Membership;
-  
+  allMemberships: Membership[];
   membershypType: MembershipType;
   membershipSize: MembershipSize;
   membershipHistoryRecord: MembershipHistoryRecord;
@@ -35,6 +35,7 @@ export class MemberListComponent implements OnInit {
   isCollapsed = true;
   private currentMemberSource = new ReplaySubject<Member>(1);
   currentMember$ = this.currentMemberSource.asObservable();
+  
 
 
   constructor(private memberService: MembersService, private membershipService: MembershipService, 
@@ -112,6 +113,16 @@ export class MemberListComponent implements OnInit {
   addMembership() {
     this.setSelectedMember(this.selectedMember.id);
   }
+
+  onShowHistory(evt: any) {
+    this.membershipService.getAllMemberships(this.selectedMember.id).subscribe(m => {
+      this.allMemberships = m;
+      //console.log(m);
+    });
+    console.log(evt);
+  }
+
+
 /*
   fireVisitRegisterSuccess(): void {
     this.alerts.push({

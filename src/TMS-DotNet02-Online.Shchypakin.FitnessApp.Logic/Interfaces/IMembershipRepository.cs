@@ -18,6 +18,8 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Interfaces
 
         Task<Membership> Add(Membership membership);
 
+        Task<IEnumerable<MembershipDto>> GetAllAsync(int clientId);
+
         bool MembershipExists(int id);
     }
 }

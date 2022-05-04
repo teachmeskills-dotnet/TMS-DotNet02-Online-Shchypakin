@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
@@ -51,6 +52,11 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Managers
             return membership;
         }
 
-        
+        public async Task<IEnumerable<MembershipDto>> GetAllAsync(int clientId)
+        {
+            return await _context.Memberships.Where(m => m.ClientId == clientId)
+                .ProjectTo<MembershipDto>(_mapper.ConfigurationProvider).ToListAsync();
+                                        ;
+        }
     }
 }

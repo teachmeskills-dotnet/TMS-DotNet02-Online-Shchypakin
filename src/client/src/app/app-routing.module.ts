@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { EditMembershipComponent } from './edit-membership/edit-membership.component';
 import { HomeComponent } from './home/home.component';
 import { ListsComponent } from './lists/lists.component';
 import { LoginComponent } from './login/login.component';
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'members', component: MemberListComponent, canActivate: [AuthGuard]},
   {path: 'members/editdata', component: MemberEditComponent, canActivate: [AuthGuard], canDeactivate: [PreventUnsavedChangesGuard]},
+  {path: 'members/editmembership', component: EditMembershipComponent, canActivate: [AuthGuard], canDeactivate: [PreventUnsavedChangesGuard]},
   //{path: 'members/:id', component: MemberDetailComponent},
   {path: 'lists', component: ListsComponent},
   {path: 'messages', component: MessagesComponent},

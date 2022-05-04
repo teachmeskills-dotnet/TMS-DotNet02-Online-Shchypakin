@@ -4,6 +4,5 @@ export interface MembershipToSend {
     end: Date;
     online: boolean;
     membershipTypeId: number;
-    membershipSizeId: number;
-    
+    membershipSizeId: number;  
 }

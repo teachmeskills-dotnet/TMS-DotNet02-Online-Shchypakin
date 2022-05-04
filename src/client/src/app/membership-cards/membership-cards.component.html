@@ -30,13 +30,13 @@
                         </div>
                         <div class="child flex-child">
                             <button class="btn btn-danger mt-2" type="button" 
-                                    (click)="onRemoveClick(record.id)">Удалить</button>
+                                    (click)="onRemoveClick(record.id)" *ngIf="editable">Удалить</button>
                         </div>
                     </div>
                 </div>
             </div> 
             <button class="btn btn-success mt-2" type="button" style="height: 5ex;" 
-                    (click)="onAddClick()">Отметить посещение</button>                                  
+                    (click)="onAddClick()" *ngIf="editable">Отметить посещение</button>                                  
         </div>   
     </div>
 </div>  

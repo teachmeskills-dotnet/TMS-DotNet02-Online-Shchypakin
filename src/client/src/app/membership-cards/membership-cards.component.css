@@ -2,3 +2,10 @@
     display: flex;
     justify-content: space-between;
 }
+
+.active {
+    background-color: bg-light;
+  }
+.inactive {
+    background-color: bg-dark;
+  }

@@ -31,5 +31,9 @@ export class MembershipService {
     return this.http.post<MembershipToSend>(this.baseUrl + 'apiMembership/Add', membership).pipe();
   }
 
+  getAllMemberships(memberId: number) {
+    return this.http.get<Membership[]>(this.baseUrl + 'apiMembership/AllMemberships?clientId=' + memberId);
+  }
+
   
 }

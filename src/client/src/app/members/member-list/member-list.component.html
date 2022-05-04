@@ -53,13 +53,13 @@
     </div>
     <div class="col-8">
         <div class="row justify-content-center">
-            <tabset class="member-tabset">
+            <tabset class="member-tabset" >
                 <tab heading="Актуальное">
                     <h2>Действующие абонементы</h2>
                     <div id="membershipCards" class="showMemberships" *ngIf="selectedMember">
                         <div *ngFor="let membership of selectedMember.memberships" [value] ="membership"> 
                             <app-membership-cards [membership]="membership" (parentFun)="registerVisit($event)"
-                                (parentRemoveFun)="deleteRecord($event)"></app-membership-cards>                      
+                                (parentRemoveFun)="deleteRecord($event)" [editable]="true"></app-membership-cards>                      
                         </div>
                     </div>
                 </tab>
@@ -70,12 +70,11 @@
                             (parentFun)="addMembership($event)"></app-assign-membership>
                     </div>                   
                 </tab>
-                <tab heading="История">
-                    <h2>Завершенные абонементы</h2>
+                <tab heading="История"(selectTab)="onShowHistory($event)" >
+                    <h2>Все абонементы клиента</h2>
                     <div class="showMemberships" *ngIf="selectedMember">
-                        <div *ngFor="let membership of selectedMember.memberships" [value] ="membership"> 
-                            <app-membership-cards [membership]="membership" (parentFun)="registerVisit($event)"
-                                (parentRemoveFun)="deleteRecord($event)"></app-membership-cards>                      
+                        <div *ngFor="let membership of allMemberships" [value] ="membership"> 
+                            <app-membership-cards [membership]="membership" ></app-membership-cards>                      
                         </div>
                     </div>
                 </tab>

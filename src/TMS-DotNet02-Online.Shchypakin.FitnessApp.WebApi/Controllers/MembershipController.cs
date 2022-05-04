@@ -83,5 +83,23 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Controllers
 
             return Ok();
         }
+
+        [Authorize]
+        [HttpGet("AllMemberships")]
+        public async Task<ActionResult<IEnumerable<MembershipDto>>> GetAll(int clientId)
+        {
+            if (!_membershipRepository.MembershipExists(clientId))
+                return BadRequest("Membership doesn't exist");
+
+            var memberships = await _membershipRepository.GetAllAsync(clientId);
+
+            foreach (var membership in memberships)
+            {
+                membership.VisitsLeft = membership.MembershipSize.Count - membership.MembershipHistoryRecords.Count;
+            }
+
+            return Ok(memberships);
+        }
+
     }
 }

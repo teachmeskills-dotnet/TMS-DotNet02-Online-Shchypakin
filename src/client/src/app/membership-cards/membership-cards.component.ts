@@ -18,6 +18,9 @@ export class MembershipCardsComponent implements OnInit {
 @Input() memberService: MembersService;
 @Output() parentFun: EventEmitter<number> = new EventEmitter();
 @Output() parentRemoveFun: EventEmitter<number> = new EventEmitter();
+@Input() editable: boolean;
+isActive: boolean;
+bgColor: any;
 
 records$: Observable<MembershipHistoryRecord[]>;
 
@@ -33,7 +36,16 @@ isCollapsed = true;
         observer.complete();
       });
     }*/
-    this.records$ = this.getRecords(this.membership.membershipHistoryRecords)
+    this.records$ = this.getRecords(this.membership.membershipHistoryRecords);
+    this.isActive = this.membership.end > new Date();
+    if (this.membership.end > new Date()) {
+      this.bgColor = 'bg-light';
+    }
+    else {
+      this.bgColor = 'bg-dark';
+    }
+
+
   }
 
   getRecords(records: MembershipHistoryRecord[]) {
