@@ -51,9 +51,24 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Managers
             return membershipTypes;
         }
 
+        public void Update(MembershipType membershipType)
+        {
+            _context.Entry(membershipType).State = EntityState.Modified;
+        }
+
+        public bool MembershipTypeExists(int id)
+        {
+            return _context.MembershipTypes.Any(e => e.Id == id);
+        }
+
         public async Task<bool> SaveAllAsync()
         {
             return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<MembershipType> GetMembershipTypeByIdAsync(int id)
+        {
+            return await _context.MembershipTypes.FindAsync(id);
         }
     }
 }

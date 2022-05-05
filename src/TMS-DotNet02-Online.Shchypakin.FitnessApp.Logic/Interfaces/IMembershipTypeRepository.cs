@@ -14,6 +14,12 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Interfaces
 
         Task<MembershipType> Add(MembershipTypeDto membershipType);
 
+        void Update(MembershipType membershipType);
+
+        Task<MembershipType> GetMembershipTypeByIdAsync(int id);
+
+        bool MembershipTypeExists(int id);
+
         Task<bool> SaveAllAsync();
     }
 }

@@ -5,6 +5,8 @@ import { Membership } from '../_models/membership';
 import { MembershipHistoryRecord } from '../_models/membershipHistoryRecord';
 import { MembersService } from '../_services/members.service';
 import {of} from 'rxjs';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { EditMembershipComponent } from '../edit-membership/edit-membership.component';
 
 @Component({
   selector: 'app-membership-cards',
@@ -26,7 +28,7 @@ records$: Observable<MembershipHistoryRecord[]>;
 
 isCollapsed = true;
 
-  constructor() { }
+  constructor(private modalService: NgbModal) { }
 
   ngOnInit(): void {
     /*if(this.membership.membershipHistoryRecords) {
@@ -62,6 +64,11 @@ isCollapsed = true;
   onRemoveClick(id: number) {
     this.parentRemoveFun.emit(id);
     console.log(id);
+  }
+
+  onUpdateClick() {
+    const ref = this.modalService.open(EditMembershipComponent, { centered: true });
+    ref.componentInstance.selectedMembership = this.membership;
   }
 
 }

@@ -40,9 +40,9 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Managers
             return membershipTypes;
         }
 
-        public Task<bool> SaveAllAsync()
+        public async Task<bool> SaveAllAsync()
         {
-            throw new NotImplementedException();
+            return await _context.SaveChangesAsync() > 0;
         }
     }
 }

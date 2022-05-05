@@ -80,7 +80,7 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Controllers
 
             client.LastVisit = lastVisit;
 
-            var memberships = client.Memberships.Where(m => m.End > DateTime.UtcNow).ToList();
+            var memberships = client.Memberships.Where(m => m.End.Date >= DateTime.UtcNow.Date).ToList();
 
             foreach(var membership in memberships)
             {

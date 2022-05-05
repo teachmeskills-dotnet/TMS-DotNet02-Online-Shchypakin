@@ -9,3 +9,15 @@
 .inactive {
     background-color: bg-dark;
   }
+
+  .box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;   
+    justify-content: space-between;
+  }
+  .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }

@@ -49,6 +49,50 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Controllers
         }
 
         [Authorize(Roles = "Admin")]
+        [HttpPost("AddType")]
+        public async Task<ActionResult<MembershipType>> GetAddType(string membershipType)
+        {
+            var newType = await _membershipTypeRepository.Add(new MembershipTypeDto { Type = membershipType });
+
+            if( await _membershipTypeRepository.SaveAllAsync())
+            {
+                return Ok(newType);
+            }
+            return BadRequest("Failed to add");
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost("AddSize")]
+        public async Task<ActionResult<MembershipSize>> GetAddSize(int membershipSize)
+        {
+            var newSize = await _membershipSizeRepository.Add(new MembershipSizeDto { Count = membershipSize });
+
+            if (await _membershipSizeRepository.SaveAllAsync())
+            {
+                return Ok(newSize);
+            }
+            return BadRequest("Failed to add");
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPut("UpdateType")]
+        public async Task<ActionResult<MembershipDto>> UpdateType(MembershipTypeDto membershipType)
+        {
+            if (!_membershipTypeRepository.MembershipTypeExists(membershipType.Id))
+                return BadRequest("Membership type doesn't exist");
+
+            var membershipToUpdate = await _membershipTypeRepository.GetMembershipTypeByIdAsync(membershipType.Id);
+
+            _mapper.Map(membershipType, membershipToUpdate);
+
+            _membershipTypeRepository.Update(membershipToUpdate);
+
+            await _membershipRepository.SaveAllAsync();
+
+            return Ok();
+        }
+
+        [Authorize(Roles = "Admin")]
         [HttpGet("SizeType")]
         public async Task<ActionResult<TypeSizeDto>> GetSizeType()
         {
@@ -67,7 +111,7 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpPost("Update")]
+        [HttpPut("Update")]
         public async Task<ActionResult<MembershipDto>> Update(FromClientMembershipDto membership)
         {
             if (!_membershipRepository.MembershipExists(membership.Id))

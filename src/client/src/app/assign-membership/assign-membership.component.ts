@@ -34,7 +34,7 @@ export class AssignMembershipComponent implements OnInit {
     this.membershipService.getTypeSize().subscribe(typeSize => {
       this.types = typeSize.types;
       this.sizes = typeSize.sizes;
-    })
+    });
   }
 
   initializeForm() {

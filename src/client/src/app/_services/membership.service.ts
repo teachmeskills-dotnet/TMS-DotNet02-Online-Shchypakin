@@ -4,7 +4,10 @@ import { environment } from 'src/environments/environment';
 import { Membership } from '../_models/membership';
 import { MembershipHistoryRecord } from '../_models/membershipHistoryRecord';
 import { MembershipToSend } from '../_models/membershipToSend';
+import { MembershipToUpdate } from '../_models/membershipToUpdate';
+import { MembershipType } from '../_models/membershipType';
 import { MembershipTypeSize } from '../_models/membershipTypeSize';
+
 
 @Injectable({
   providedIn: 'root'
@@ -35,5 +38,12 @@ export class MembershipService {
     return this.http.get<Membership[]>(this.baseUrl + 'apiMembership/AllMemberships?clientId=' + memberId);
   }
 
+  update(membership: MembershipToUpdate) {
+    return this.http.put<MembershipToUpdate>(this.baseUrl + 'apiMembership/Update', membership).pipe();
+  }
+
+  updateType(embershipType: MembershipType) {
+    return this.http.put<MembershipType>(this.baseUrl + 'apiMembership/UpdateType', embershipType).pipe();
+  }
   
 }

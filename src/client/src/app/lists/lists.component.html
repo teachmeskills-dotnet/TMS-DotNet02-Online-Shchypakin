@@ -1,1 +1,37 @@
-<p>lists works!</p>
+
+<h2 style="text-align:center">Добавление и редактирование типов абонемента</h2>
+<hr>  
+
+<form [formGroup]="assignForm" autocomplete="off">
+    <div class="parent">
+        <div class="child flex-child">
+            <div class="form-group">
+                <label>Дисциплина</label>
+                <select class="form-control" name="type" formControlName="type">
+                    <option *ngFor="let type of types" [value]="type">
+                        {{type.type}}
+                    </option>
+                </select>
+            </div>
+        </div>
+         
+        <div class="child flex-child">
+            <div class="form-group">
+                <label>Количество занятий</label>
+                <select class="form-control" formControlName="size">
+                    <option *ngFor="let size of sizes" [value]="size">
+                        {{size.count}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        
+    </div>
+</form>
+<select [(ngModel)]="selectedType" (change)="onTypeSelected()">
+    <option *ngFor="let type of types" [ngValue]="type">
+        {{type.type}}
+    </option>
+</select>
+<input type="text" class="form-control mb-2" name="username" [(ngModel)]="typeToUpdate.type" placeholder="Phone or Uesrname"> 
+<button class="btn btn-primary mr-2" (click)="onTypeUpdate()">Закрыть</button>
