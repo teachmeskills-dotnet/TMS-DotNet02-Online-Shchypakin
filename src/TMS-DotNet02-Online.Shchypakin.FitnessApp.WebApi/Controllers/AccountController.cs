@@ -52,7 +52,13 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Controllers
 
             client.UserName = registerDto.Username.ToLower();
 
-            client.Fullname = registerDto.Username.ToLower();
+            client.Fullname = registerDto.Lastname.ToLower() + " " + registerDto.Firstname.ToLower();
+
+            client.Birthday = registerDto.Birthday;
+
+            client.Email = registerDto.Email;
+
+            client.PhoneNumber = registerDto.PhoneNumber;
 
             var result = await _userManager.CreateAsync(client, registerDto.Password);
 
@@ -86,7 +92,9 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Controllers
 
             return new UserDto
             {
+                Id = user.Id,
                 Username = loginDto.ClientName,
+                Fullname = user.Fullname,
                 Token = await _tokenService.CreateToken(user)
             };
         }

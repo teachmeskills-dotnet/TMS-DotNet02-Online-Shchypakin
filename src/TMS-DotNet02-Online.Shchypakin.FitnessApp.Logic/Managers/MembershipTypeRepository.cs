@@ -61,6 +61,11 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Managers
             return _context.MembershipTypes.Any(e => e.Id == id);
         }
 
+        public bool MembershipTypeNameExists(string type)
+        {
+            return _context.MembershipTypes.Any(e => e.Type == type);
+        }
+
         public async Task<bool> SaveAllAsync()
         {
             return await _context.SaveChangesAsync() > 0;

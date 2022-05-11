@@ -20,6 +20,8 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Interfaces
 
         bool MembershipTypeExists(int id);
 
+        bool MembershipTypeNameExists(string type);
+
         Task<bool> SaveAllAsync();
     }
 }

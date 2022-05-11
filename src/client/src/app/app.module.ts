@@ -32,6 +32,10 @@ import { TextInputComponent } from './_forms/text-input/text-input.component';
 import { DateInputComponent } from './_forms/date-input/date-input.component';
 import { EditMembershipComponent } from './edit-membership/edit-membership.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HasRoleDirective } from './_directives/has-role.directive';
+import { UserEditDataComponent } from './user/user-edit-data/user-edit-data.component';
+import { MemberProfileComponent } from './members/member-profile/member-profile.component';
+import { MembershipsComponent } from './members/memberships/memberships.component';
 
 
 @NgModule({
@@ -50,7 +54,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MemberEditComponent,
     TextInputComponent,
     DateInputComponent,
-    EditMembershipComponent
+    EditMembershipComponent,
+    HasRoleDirective,
+    UserEditDataComponent,
+    MemberProfileComponent,
+    MembershipsComponent
   ],
   imports: [
     BrowserModule,

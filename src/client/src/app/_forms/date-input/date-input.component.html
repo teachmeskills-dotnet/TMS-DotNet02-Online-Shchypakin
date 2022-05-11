@@ -9,4 +9,5 @@
         [bsConfig]="bsConfig"
         
     >
+    <div *ngIf="ngControl.control.errors?.required" class="invalid-feedback">Необходимо ввести дату</div>
 </div>

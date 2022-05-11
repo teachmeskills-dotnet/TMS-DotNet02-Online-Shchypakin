@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using TMS_DotNet02_Online.Shchypakin.FitnessApp.Data.Enities;
 using TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Dto;
@@ -16,12 +18,35 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Controllers
     {
         private readonly IClientRepository _clientRepository;
         private readonly IMapper _mapper;
+        private readonly UserManager<Client> _userManager;
 
-        public ClientsController(IClientRepository clientRepository, IMapper mapper)
+        public ClientsController(IClientRepository clientRepository, IMapper mapper, UserManager<Client> userManager)
         {
             _clientRepository = clientRepository;
             _mapper = mapper;
+            _userManager = userManager;
         }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePasswordDto passwordDto)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if(user == null)
+            {
+                return BadRequest("User not found");
+            }
+
+            var result = await _userManager.ChangePasswordAsync(user, passwordDto.CurrentPassword, passwordDto.NewPassword);
+
+            if(result.Succeeded)
+            {
+                return Ok();
+            }
+            return BadRequest("Unable to change password");
+        }
+
+
 
         [Authorize]
         [HttpGet]
@@ -46,7 +71,7 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Controllers
         //public async Task<ActionResult<Client>> GetClient(int id)
         //{
         //    return await _clientRepository.GetClientByIdAsync(id);
-        //}
+        //} var userName = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
         //[Authorize]
         [HttpGet("{clientname}")]
@@ -56,9 +81,28 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Controllers
             return client;
         }
 
+        [Authorize]
+        [HttpGet("profile")]
+        public async Task<ActionResult<MemberDto>> GetClientByToken()
+        {
+            int id;
+
+            if (int.TryParse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value, out id))
+            {
+                return await GetById(id);
+            }
+            return BadRequest("Unable to identify user");
+        }
+
+
         [Authorize(Roles = "Admin")]
         [HttpGet("{id:int}")]
         public async Task<ActionResult<MemberDto>> GetClientById(int id)
+        {
+            return await GetById(id);
+        }
+
+        private async Task<ActionResult<MemberDto>> GetById(int id)
         {
             if (!_clientRepository.ClientExists(id))
                 return NotFound($"Client with Id = {id} not found");
@@ -67,11 +111,11 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Controllers
 
             DateTime lastVisit = DateTime.MinValue;
 
-            foreach(var membership in client.Memberships)
+            foreach (var membership in client.Memberships)
             {
-                foreach(var record in membership.MembershipHistoryRecords)
+                foreach (var record in membership.MembershipHistoryRecords)
                 {
-                    if(record.Date > lastVisit)
+                    if (record.Date > lastVisit)
                     {
                         lastVisit = record.Date;
                     }
@@ -82,13 +126,13 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Controllers
 
             var memberships = client.Memberships.Where(m => m.End.Date >= DateTime.UtcNow.Date).ToList();
 
-            foreach(var membership in memberships)
+            foreach (var membership in memberships)
             {
                 membership.VisitsLeft = membership.MembershipSize.Count - membership.MembershipHistoryRecords.Count;
             }
 
             client.Memberships = memberships;
-            
+
             var clientToSend = _mapper.Map<MemberDto>(client);
 
             return clientToSend;
@@ -111,6 +155,8 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Controllers
             _clientRepository.Update(clientToUpdate);
 
             await _clientRepository.SaveAllAsync();
+
+            
 
             return Ok();
         }

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Membership } from '../_models/membership';
 import { MembershipSize } from '../_models/membershipSize';
@@ -38,13 +38,13 @@ export class AssignMembershipComponent implements OnInit {
   }
 
   initializeForm() {
-    this.assignForm = new FormGroup({
-      clientId: new FormControl(),
-      start: new FormControl(),
-      end: new FormControl(),
-      online: new FormControl(),
-      membershipTypeId: new FormControl(),
-      membershipSizeId: new FormControl()
+    this.assignForm = this.fb.group({
+      clientId: [this.currentMemberId],
+      start: [new Date(), Validators.required],
+      end: [new Date(), Validators.required],
+      online: [false],
+      membershipTypeId: [1, Validators.required],
+      membershipSizeId: [1, Validators.required]
       
     })
   }

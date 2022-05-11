@@ -1,10 +1,13 @@
-<p>member-list works!</p>
 <div class="row">
     <div class="col-4">  
         <div class="d-flex flex-row">             
-            <mat-form-field style="width: 100%; display: block;">
-                <input type="text" placeholder="Фамилия" matInput [matAutocomplete]="auto" [formControl] = "myControl" 
-                    (click)="onInputClick()">
+            <mat-form-field style="width: 100%; display: block;" class="my-class">
+                <div class="parent">
+                    <button class="nosubmit">Search</button>
+                    <input type="search"  placeholder="Фамилия" matInput [matAutocomplete]="auto" [formControl] = "myControl" 
+                    (click)="onInputClick()">             
+                </div>
+                
                 <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="onShowClick()">
                     <mat-option *ngFor="let user of autoFilter | async" [value]="user">
                         {{user}}
@@ -54,7 +57,7 @@
     <div class="col-8">
         <div class="row justify-content-center">
             <tabset class="member-tabset" >
-                <tab heading="Актуальное">
+                <tab heading="Актуальные">
                     <h2>Действующие абонементы</h2>
                     <div id="membershipCards" class="showMemberships" *ngIf="selectedMember">
                         <div *ngFor="let membership of selectedMember.memberships" [value] ="membership"> 
@@ -77,9 +80,6 @@
                             <app-membership-cards [membership]="membership" ></app-membership-cards>                      
                         </div>
                     </div>
-                </tab>
-                <tab heading="Создание нового абонемента">
-
                 </tab>
             </tabset>
         </div>

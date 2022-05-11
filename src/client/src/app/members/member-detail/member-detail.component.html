@@ -1,1 +1,33 @@
-<p>member-detail works!</p>
+<div class="row">
+    
+    <div class="col-8">
+        <div class="row justify-content-center">
+            <tabset class="member-tabset" >
+                <tab heading="Актуальное">
+                    <h2>Действующие абонементы</h2>
+                    <div id="membershipCards" class="showMemberships" *ngIf="member">
+                        <div *ngFor="let membership of member.memberships" [value] ="membership"> 
+                            <app-membership-cards [membership]="membership" (parentFun)="registerVisit($event)"
+                                (parentRemoveFun)="deleteRecord($event)" [editable]="false"></app-membership-cards>                      
+                        </div>
+                    </div>
+                </tab>
+                <tab heading="История"(selectTab)="onShowHistory($event)" >
+                    <h2>Все абонементы клиента</h2>
+                    <div class="showMemberships" *ngIf="member">
+                        <div *ngFor="let membership of allMemberships" [value] ="membership"> 
+                            <app-membership-cards [membership]="membership" ></app-membership-cards>                      
+                        </div>
+                    </div>
+                </tab>
+            </tabset>
+        </div>
+    </div>
+</div> 
+<!--     
+<div *ngFor="let alert of alerts">
+    <alert class="fixed-bottom" [type]="alert.type" [dismissOnTimeout]="alert.timeout">{{ alert.msg }}</alert>
+</div>     
+-->     
+
+

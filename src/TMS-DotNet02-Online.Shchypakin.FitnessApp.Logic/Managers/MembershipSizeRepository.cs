@@ -40,6 +40,11 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Managers
             return membershipTypes;
         }
 
+        public bool MembershipSizeCountExists(int count)
+        {
+            return _context.MembershipSizes.Any(e => e.Count == count);
+        }
+
         public async Task<bool> SaveAllAsync()
         {
             return await _context.SaveChangesAsync() > 0;

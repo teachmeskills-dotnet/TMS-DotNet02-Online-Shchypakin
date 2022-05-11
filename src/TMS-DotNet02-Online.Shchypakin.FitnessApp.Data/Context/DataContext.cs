@@ -25,6 +25,8 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Data.Context
 
         public DbSet<MembershipType> MembershipTypes { get; set; }
 
+        public DbSet<Videolinks> Videolinks { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder = builder ?? throw new ArgumentNullException(nameof(builder));

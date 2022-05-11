@@ -31,4 +31,7 @@ export class MembersService {
     return this.http.put<MemberToSend>(this.baseUrl + 'apiClients/' + member.id,  member).pipe();
   }
   
+  getMemberByToken() {
+    return this.http.get<Member>(this.baseUrl + 'apiClients/profile');
+  }
 }

@@ -323,6 +323,20 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Data.Migrations
                     b.ToTable("MembershipTypes", "membership");
                 });
 
+            modelBuilder.Entity("TMS_DotNet02_Online.Shchypakin.FitnessApp.Data.Enities.Videolinks", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Link")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Videolinks");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.HasOne("TMS_DotNet02_Online.Shchypakin.FitnessApp.Data.Enities.AppRole", null)

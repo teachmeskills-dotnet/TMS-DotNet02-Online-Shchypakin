@@ -14,6 +14,8 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Interfaces
 
         Task<MembershipSize> Add(MembershipSizeDto membershipSize);
 
+        bool MembershipSizeCountExists(int count);
+
         Task<bool> SaveAllAsync();
     }
 }

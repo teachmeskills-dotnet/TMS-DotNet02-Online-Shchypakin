@@ -50,8 +50,13 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpPost("AddType")]
-        public async Task<ActionResult<MembershipType>> GetAddType(string membershipType)
+        public async Task<ActionResult<MembershipType>> AddType(string membershipType)
         {
+            if(_membershipTypeRepository.MembershipTypeNameExists(membershipType))
+            {
+                return BadRequest("A type with the same name already exists");
+            }
+
             var newType = await _membershipTypeRepository.Add(new MembershipTypeDto { Type = membershipType });
 
             if( await _membershipTypeRepository.SaveAllAsync())
@@ -63,8 +68,13 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpPost("AddSize")]
-        public async Task<ActionResult<MembershipSize>> GetAddSize(int membershipSize)
+        public async Task<ActionResult<MembershipSize>> AddSize(int membershipSize)
         {
+            if (_membershipSizeRepository.MembershipSizeCountExists(membershipSize))
+            {
+                return BadRequest("A size with the same count already exists");
+            }
+
             var newSize = await _membershipSizeRepository.Add(new MembershipSizeDto { Count = membershipSize });
 
             if (await _membershipSizeRepository.SaveAllAsync())

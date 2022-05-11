@@ -45,5 +45,13 @@ export class MembershipService {
   updateType(embershipType: MembershipType) {
     return this.http.put<MembershipType>(this.baseUrl + 'apiMembership/UpdateType', embershipType).pipe();
   }
-  
+
+  addType(type: string) {
+    return this.http.post<any>(this.baseUrl + 'apiMembership/AddType?membershipType=' + type, type).pipe();
+  }
+
+  addSize(count: number) {
+    return this.http.post<any>(this.baseUrl + 'apiMembership/AddSize?membershipSize=' + count, count).pipe();
+  }
+   
 }

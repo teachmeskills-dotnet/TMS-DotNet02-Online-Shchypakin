@@ -17,7 +17,8 @@ export class ListsComponent implements OnInit {
   assignForm: FormGroup;
   selectedType: MembershipType = {} as MembershipType;
   typeToUpdate: MembershipType = {} as MembershipType;
-  
+  typeToAdd: string;
+  sizeToAdd: number;
   
   constructor(private membershipService: MembershipService, private toastr: ToastrService,
     private fb: FormBuilder) {
@@ -42,6 +43,7 @@ export class ListsComponent implements OnInit {
     this.typeToUpdate.id = this.selectedType.id;
     this.typeToUpdate.type = this.selectedType.type;
     console.log(this.typeToUpdate.id);
+    
   }
 
   onTypeUpdate() {
@@ -49,6 +51,23 @@ export class ListsComponent implements OnInit {
       this.toastr.success(`Тип изменен`) ;
     }), (e => {
       console.log(e);
+    })
+  }
+
+  onTypeAdd() {
+    this.membershipService.addType(this.typeToAdd).subscribe(t => {
+      this.toastr.success(`Тип добавлен`) ;
+    }), (e => {
+      console.log(e);  
+    })
+  }
+
+  onSizeAdd() {
+    this.membershipService.addSize(this.sizeToAdd).subscribe(t => {
+      this.toastr.success(`Количество посещений добавлено`) ;
+    }), (e => {
+      console.log(e); 
+
     })
   }
 }
