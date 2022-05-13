@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import { AngularMaterialModule } from './angular-material.module';
+import { PlyrModule } from 'ngx-plyr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -70,6 +71,7 @@ import { MembershipsComponent } from './members/memberships/memberships.componen
     AngularMaterialModule,
     AutocompleteLibModule,
     FormsModule,
+    PlyrModule,
     BsDropdownModule.forRoot(),
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right'

@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Data.Enities
+namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Dto
 {
-    public class Videolinks
+    public class VideolinksDto
     {
-        public int Id { get; set; }
-
         public string Link { get; set; }
 
         public string Name { get; set; }

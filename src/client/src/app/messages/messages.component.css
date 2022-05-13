@@ -1,3 +1,13 @@
 p {
     font-family: Lato;
   }
+
+  .plyr__controls {
+    display: none;
+    }
+
+    .parent{
+      display: flex;
+    
+      
+  }

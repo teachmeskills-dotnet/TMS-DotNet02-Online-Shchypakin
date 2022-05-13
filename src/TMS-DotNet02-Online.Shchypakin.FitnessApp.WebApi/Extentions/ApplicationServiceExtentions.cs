@@ -19,6 +19,7 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Extentions
             services.AddScoped<IHistoryRecordRepository, HistoryRecordRepository>();
             services.AddScoped<IMembershipTypeRepository, MembershipTypeRepository>();
             services.AddScoped<IMembershipSizeRepository, MembershipSizeRepository>();
+            services.AddScoped<IVideoRepository, VideoRepository>();
             services.AddAutoMapper(typeof(AutomapperProfiles).Assembly);
             services.AddDbContext<DataContext>(options =>
             {
