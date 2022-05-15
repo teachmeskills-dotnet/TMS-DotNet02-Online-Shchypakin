@@ -35,10 +35,10 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Managers
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<VideolinksDto>> GetVideolinksAsync()
+        public async Task<IEnumerable<Videolinks>> GetVideolinksAsync()
         {
             var videolinks = await _context.Videolinks
-                .ProjectTo<VideolinksDto>(_mapper.ConfigurationProvider)
+                //.ProjectTo<VideolinksDto>(_mapper.ConfigurationProvider)
                 .ToListAsync();
 
             return videolinks;

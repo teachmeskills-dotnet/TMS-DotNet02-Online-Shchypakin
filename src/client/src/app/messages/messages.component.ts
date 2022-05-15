@@ -30,15 +30,28 @@ export class MessagesComponent implements OnInit {
   selectedLink: Videolink = {} as Videolink;
   urlSafe: SafeResourceUrl;
 
-  // or get it from plyrInit event
+  // or get it from plyrInit event 'https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4'
   player: Plyr; 
 
+  videoSources: Plyr.Source[] = [
+    {
+      src: 'https://youtu.be/_luhn7TLfWU',
+      provider: 'youtube',
+    }
+  ];
+
+  youtubeSources = [
+    {
+      src: 'https://youtube.com/watch?v=bTqVqk7FSmY',
+      provider: 'youtube',
+    },
+  ];
   constructor(private memberService: MembersService, private videoService: VideoService, 
     private toastr: ToastrService, public sanitizer: DomSanitizer) {
       
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {  
     this.memberService.getMemberByToken().subscribe(member => {
       this.member = member;
       if(this.member.memberships.length > 0) {
@@ -74,17 +87,27 @@ export class MessagesComponent implements OnInit {
   }
 
   onAddLink() {
-    console.log(this.urlToAdd); 
-    if(this.urlToAdd.includes("view?usp=sharing")) {
-      this.urlToAdd.replace("view?usp=sharing", "preview");
-      this.linkToAdd.link = this.urlToAdd;
+      if(this.urlToAdd.includes("view?usp=sharing")) {
+      this.linkToAdd.link = this.urlToAdd.replace("view?usp=sharing", "preview");
       this.linkToAdd.name = this.nameToAdd;
+      console.log(this.urlToAdd);
       this.videoService.postVideolink(this.linkToAdd).subscribe(l => {
         this.toastr.success(`Видео добавлено`) ;
+        this.getLinks(); 
       }), (e => {
         console.log(e);  
       })
     }
+  }
+
+  onRemoveLink() {
+    if(confirm("Are you sure to delete ")) {
+      this.videoService.deleteVideolink(this.selectedLink.id).subscribe(d => {
+        this.toastr.success("Видео удалено");
+        this.getLinks(); 
+      })
+    }
+    
   }
 
 }

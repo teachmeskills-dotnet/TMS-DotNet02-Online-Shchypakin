@@ -7,7 +7,16 @@ p {
     }
 
     .parent{
-      display: flex;
-    
-      
+      display: flex;      
   }
+
+  .inline {
+    display: flex;
+  }
+
+  .wrapper {
+    padding: 32px;
+  }
+
+  .ndfHFb-c4YZDc-Wrql6b{visibility: hidden};
+  

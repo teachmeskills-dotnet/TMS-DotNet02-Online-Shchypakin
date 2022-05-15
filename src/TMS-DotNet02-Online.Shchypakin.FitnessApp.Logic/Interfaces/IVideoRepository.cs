@@ -13,7 +13,7 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Interfaces
         
         Task<bool> SaveAllAsync();
 
-        Task<IEnumerable<VideolinksDto>> GetVideolinksAsync();
+        Task<IEnumerable<Videolinks>> GetVideolinksAsync();
 
         Task<Videolinks> GetVideolinkByIdAsync(int id);
 
