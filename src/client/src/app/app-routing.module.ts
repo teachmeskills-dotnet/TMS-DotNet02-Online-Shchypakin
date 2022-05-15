@@ -11,6 +11,7 @@ import { MemberProfileComponent } from './members/member-profile/member-profile.
 import { MembershipsComponent } from './members/memberships/memberships.component';
 import { MessagesComponent } from './messages/messages.component';
 import { RegisterComponent } from './register/register.component';
+import { VideoComponent } from './videopage/video/video.component';
 import { AdminGuard } from './_guards/admin.guard';
 import { AuthGuard } from './_guards/auth.guard';
 import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
@@ -27,6 +28,7 @@ const routes: Routes = [
   {path: 'memberships', component: MembershipsComponent, canActivate: [AuthGuard]},
   {path: 'lists', component: ListsComponent, canActivate: [AdminGuard]},
   {path: 'messages', component: MessagesComponent},
+  {path: 'video', component: VideoComponent, canActivate: [AuthGuard]},
   {path: '**', component: HomeComponent, pathMatch: 'full'},
 ];
 

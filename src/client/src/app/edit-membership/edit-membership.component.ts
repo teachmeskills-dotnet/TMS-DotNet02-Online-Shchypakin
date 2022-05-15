@@ -23,13 +23,10 @@ export class EditMembershipComponent implements OnInit {
   selectedMembership: Membership;
   membershipToUpdate: MembershipToUpdate;
   
-  constructor(public modal: NgbActiveModal, private membershipService: MembershipService, private toastr: ToastrService, private fb: FormBuilder) {
-    //this.initializeForm();
-   }
+  constructor(public modal: NgbActiveModal, private membershipService: MembershipService, 
+    private toastr: ToastrService, private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    //this.setInitialValues();
-    //this.editForm.reset(this.selectedMembership);
     this.initializeForm();
     this.membershipService.getTypeSize().subscribe(typeSize => {
       this.types = typeSize.types;
@@ -51,8 +48,7 @@ export class EditMembershipComponent implements OnInit {
     })
   }
 
-  initializeForm() {
-    
+  initializeForm() {    
     this.editForm =  this.fb.group({
       id: [this.selectedMembership.id],
       start: [new Date(this.selectedMembership.start)],

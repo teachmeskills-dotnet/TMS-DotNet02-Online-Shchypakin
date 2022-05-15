@@ -3,7 +3,6 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { MembershipSize } from '../_models/membershipSize';
 import { MembershipType } from '../_models/membershipType';
-import { MembershipTypeSize } from '../_models/membershipTypeSize';
 import { MembershipService } from '../_services/membership.service';
 
 @Component({
@@ -67,7 +66,6 @@ export class ListsComponent implements OnInit {
       this.toastr.success(`Количество посещений добавлено`) ;
     }), (e => {
       console.log(e); 
-
     })
   }
 }

@@ -37,6 +37,7 @@ import { HasRoleDirective } from './_directives/has-role.directive';
 import { UserEditDataComponent } from './user/user-edit-data/user-edit-data.component';
 import { MemberProfileComponent } from './members/member-profile/member-profile.component';
 import { MembershipsComponent } from './members/memberships/memberships.component';
+import { VideoComponent } from './videopage/video/video.component';
 
 
 @NgModule({
@@ -59,7 +60,8 @@ import { MembershipsComponent } from './members/memberships/memberships.componen
     HasRoleDirective,
     UserEditDataComponent,
     MemberProfileComponent,
-    MembershipsComponent
+    MembershipsComponent,
+    VideoComponent
   ],
   imports: [
     BrowserModule,

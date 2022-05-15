@@ -1,7 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { MemberName } from '../_models/memberName';
 import { Member } from '../_models/members';

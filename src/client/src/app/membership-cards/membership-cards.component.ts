@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Observable, Subscriber } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { Membership } from '../_models/membership';
 import { MembershipHistoryRecord } from '../_models/membershipHistoryRecord';
@@ -31,13 +31,6 @@ isCollapsed = true;
   constructor(private modalService: NgbModal) { }
 
   ngOnInit(): void {
-    /*if(this.membership.membershipHistoryRecords) {
-      
-      this.records$ = Observable.create((observer: Subscriber<any>) => {
-        observer.next(this.membership.membershipHistoryRecords);
-        observer.complete();
-      });
-    }*/
     this.records$ = this.getRecords(this.membership.membershipHistoryRecords);
     this.isActive = this.membership.end > new Date();
     if (this.membership.end > new Date()) {
@@ -46,8 +39,6 @@ isCollapsed = true;
     else {
       this.bgColor = 'bg-dark';
     }
-
-
   }
 
   getRecords(records: MembershipHistoryRecord[]) {

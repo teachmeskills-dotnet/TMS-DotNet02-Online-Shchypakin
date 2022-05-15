@@ -38,7 +38,6 @@ export class MemberDetailComponent implements OnInit {
   onShowHistory(evt: any) {
     this.membershipService.getAllMemberships(this.member.id).subscribe(m => {
       this.allMemberships = m;
-      //console.log(m);
     });
     console.log(evt);
   }

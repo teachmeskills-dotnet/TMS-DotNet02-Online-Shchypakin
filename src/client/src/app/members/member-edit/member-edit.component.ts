@@ -11,7 +11,6 @@ import { MembersService } from 'src/app/_services/members.service';
   styleUrls: ['./member-edit.component.css']
 })
 export class MemberEditComponent implements OnInit {
-  //@ViewChild('editForm') editForm: NgForm;
   editForm: FormGroup;
   selectedMember: Member;
   
@@ -40,9 +39,6 @@ export class MemberEditComponent implements OnInit {
       email: new FormControl(),
       comment: new FormControl()
     })
-    //this.editForm.value.id = this.selectedMember.id;
-    //this.editForm.value.fullName = this.selectedMember.fullName;
-
   }
 
   loadMember() {
@@ -51,12 +47,6 @@ export class MemberEditComponent implements OnInit {
 
   updateMember() {
     const memberToSend :MemberToSend = {} as MemberToSend; 
-    /*memberToSend.id = this.selectedMember.id;
-    memberToSend.fullName = this.selectedMember.fullName;
-    memberToSend.birthday = this.selectedMember.birthday;
-    memberToSend.phoneNumber = this.selectedMember.phoneNumber;
-    memberToSend.email = this.selectedMember.email;
-    memberToSend.comment = this.selectedMember.comment;*/
     this.editForm.value.id = this.selectedMember.id;
     this.memberService.putMember(this.editForm.value).subscribe(m => {
       this.selectedMember = this.editForm.value;

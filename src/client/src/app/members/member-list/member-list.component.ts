@@ -9,10 +9,8 @@ import { Membership } from 'src/app/_models/membership';
 import { MembershipType } from 'src/app/_models/membershipType';
 import { MembershipSize } from 'src/app/_models/membershipSize';
 import { MembershipHistoryRecord } from 'src/app/_models/membershipHistoryRecord';
-import { AlertComponent } from 'ngx-bootstrap/alert';
 import { ToastrService } from 'ngx-toastr';
 import { MembershipService } from 'src/app/_services/membership.service';
-//import { Observable } from 'rxjs/internal/Observable';
 
 
 @Component({
@@ -46,7 +44,6 @@ export class MemberListComponent implements OnInit {
     const member: Member = JSON.parse(localStorage.getItem('member'));
     
     if(member) {
-      //this.selectedMember = member;
       this.setSelectedMember(member.id);
     }  
   }
@@ -99,7 +96,6 @@ export class MemberListComponent implements OnInit {
     this.membershipService.postRecord(record).subscribe(r => {
       this.membershipHistoryRecord = r;    
       this.setSelectedMember(this.selectedMember.id);
-      //this.fireVisitRegisterSuccess();
       this.toastr.success(`Посещение отмечено: ${new Date().toLocaleTimeString()}`) ;        
     })
   }
@@ -117,19 +113,8 @@ export class MemberListComponent implements OnInit {
   onShowHistory(evt: any) {
     this.membershipService.getAllMemberships(this.selectedMember.id).subscribe(m => {
       this.allMemberships = m;
-      //console.log(m);
     });
     console.log(evt);
   }
-
-
-/*
-  fireVisitRegisterSuccess(): void {
-    this.alerts.push({
-      type: 'success',
-      msg: `Посещение отмечено: ${new Date().toLocaleTimeString()}`,
-      timeout: 5000
-    });
-  }
-*/
+  
 }

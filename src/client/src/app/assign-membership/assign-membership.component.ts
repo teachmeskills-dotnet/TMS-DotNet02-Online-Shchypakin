@@ -1,11 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { Membership } from '../_models/membership';
 import { MembershipSize } from '../_models/membershipSize';
 import { MembershipToSend } from '../_models/membershipToSend';
 import { MembershipType } from '../_models/membershipType';
-import { MembershipTypeSize } from '../_models/membershipTypeSize';
 import { MembershipService } from '../_services/membership.service';
 
 @Component({
