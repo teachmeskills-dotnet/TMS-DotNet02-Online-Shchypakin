@@ -73,6 +73,8 @@ export class VideoComponent implements OnInit {
       console.log(this.urlToAdd);
       this.videoService.postVideolink(this.linkToAdd).subscribe(l => {
         this.toastr.success(`Видео добавлено`) ;
+        this.urlToAdd = '';
+        this.nameToAdd ='';
         this.getLinks(); 
       }), (e => {
         console.log(e);  

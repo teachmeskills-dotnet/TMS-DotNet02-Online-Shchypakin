@@ -23,11 +23,9 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Extentions
             services.AddAutoMapper(typeof(AutomapperProfiles).Assembly);
             services.AddDbContext<DataContext>(options =>
             {
-                options.UseSqlite(config.GetConnectionString("DefaultConnection")/*,
-                    b => b.MigrationsAssembly("TMS-DotNet02-Online.Shchypakin.FitnessApp.WebApi")*/);
+                options.UseSqlite(config.GetConnectionString("DefaultConnection"));
             });
-            //services.AddDbContext<DataContext>(options =>
-            //    options.UseSqlServer(config.GetConnectionString("ApplicationConnection")));
+      
             services.AddCors();
             return services;
         }

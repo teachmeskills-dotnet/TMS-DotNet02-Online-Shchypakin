@@ -6,7 +6,7 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Helpers
 {
     public class AutomapperProfiles : Profile
     {
-        public AutomapperProfiles()//MembershypHistoryRecordsDto
+        public AutomapperProfiles()
         {
             CreateMap<Client, MemberDto>();
             CreateMap<Client, MembersNamesDto>();

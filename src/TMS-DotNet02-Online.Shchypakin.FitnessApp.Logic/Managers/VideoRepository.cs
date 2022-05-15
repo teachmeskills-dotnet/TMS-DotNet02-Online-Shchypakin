@@ -1,14 +1,11 @@
 ﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using TMS_DotNet02_Online.Shchypakin.FitnessApp.Data.Context;
 using TMS_DotNet02_Online.Shchypakin.FitnessApp.Data.Enities;
-using TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Dto;
 using TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Interfaces;
 
 namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Managers
@@ -37,9 +34,7 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Managers
 
         public async Task<IEnumerable<Videolinks>> GetVideolinksAsync()
         {
-            var videolinks = await _context.Videolinks
-                //.ProjectTo<VideolinksDto>(_mapper.ConfigurationProvider)
-                .ToListAsync();
+            var videolinks = await _context.Videolinks.ToListAsync();
 
             return videolinks;
         }

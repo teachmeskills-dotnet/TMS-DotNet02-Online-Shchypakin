@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,14 +31,14 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Controllers
         public async Task<IActionResult> ChangePassword(ChangePasswordDto passwordDto)
         {
             var user = await _userManager.GetUserAsync(User);
-            if(user == null)
+            if (user == null)
             {
                 return BadRequest("User not found");
             }
 
             var result = await _userManager.ChangePasswordAsync(user, passwordDto.CurrentPassword, passwordDto.NewPassword);
 
-            if(result.Succeeded)
+            if (result.Succeeded)
             {
                 return Ok();
             }
@@ -64,16 +63,7 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Controllers
             return Ok(clientsNames);
         }
 
-
-
-        //[Authorize]
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<Client>> GetClient(int id)
-        //{
-        //    return await _clientRepository.GetClientByIdAsync(id);
-        //} var userName = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
-        //[Authorize]
+        [Authorize]
         [HttpGet("{clientname}")]
         public async Task<ActionResult<MemberDto>> GetClientByName(string clientname)
         {
@@ -156,7 +146,7 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Controllers
 
             await _clientRepository.SaveAllAsync();
 
-            
+
 
             return Ok();
         }

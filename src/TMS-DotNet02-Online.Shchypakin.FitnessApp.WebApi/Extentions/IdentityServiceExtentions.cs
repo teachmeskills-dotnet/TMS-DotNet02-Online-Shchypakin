@@ -3,11 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using TMS_DotNet02_Online.Shchypakin.FitnessApp.Data.Context;
 using TMS_DotNet02_Online.Shchypakin.FitnessApp.Data.Enities;
 
@@ -15,14 +11,12 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Extentions
 {
     public static class IdentityServiceExtentions
     {
-        public static IServiceCollection AddIndentityServices(this IServiceCollection services, 
+        public static IServiceCollection AddIndentityServices(this IServiceCollection services,
             IConfiguration config)
         {
             services.AddIdentityCore<Client>(opt =>
             {
-                opt.Password.RequireNonAlphanumeric = false;              
-                //opt.SignIn.RequireConfirmedPhoneNumber = true;
-
+                opt.Password.RequireNonAlphanumeric = false;
             })
                 .AddRoles<AppRole>()
                 .AddRoleManager<RoleManager<AppRole>>()

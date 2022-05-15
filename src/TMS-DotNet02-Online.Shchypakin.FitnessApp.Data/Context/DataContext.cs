@@ -15,14 +15,22 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Data.Context
         public DataContext(DbContextOptions options) : base(options)
         {
         }
-        
 
+        /// <summary>
+        /// Memberships
+        /// </summary>
         public DbSet<Membership> Memberships { get; set; }
-
+        /// <summary>
+        /// Records of the visits
+        /// </summary>
         public DbSet<MembershipHistoryRecord> MembershipHistoryRecords { get; set; }
-
+        /// <summary>
+        /// Memberships sizes
+        /// </summary>
         public DbSet<MembershipSize> MembershipSizes { get; set; }
-
+        /// <summary>
+        /// Types of the memberships
+        /// </summary>
         public DbSet<MembershipType> MembershipTypes { get; set; }
 
         public DbSet<Videolinks> Videolinks { get; set; }

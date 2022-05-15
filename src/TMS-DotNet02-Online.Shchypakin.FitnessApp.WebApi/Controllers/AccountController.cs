@@ -2,10 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
 using System.Threading.Tasks;
 using TMS_DotNet02_Online.Shchypakin.FitnessApp.Data.Context;
 using TMS_DotNet02_Online.Shchypakin.FitnessApp.Data.Enities;
@@ -24,8 +20,8 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Controllers
         private readonly RoleManager<AppRole> _roleManager;
         private readonly DataContext _dataContext;
 
-        public AccountController(UserManager<Client> userManager, SignInManager<Client> signInManager, 
-            ITokenService tokenService, IMapper mapper, 
+        public AccountController(UserManager<Client> userManager, SignInManager<Client> signInManager,
+            ITokenService tokenService, IMapper mapper,
             RoleManager<AppRole> roleManager, DataContext dataContext)
         {
             _userManager = userManager;

@@ -1,10 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,7 +15,7 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Managers
     {
         private readonly DataContext _context;
         private readonly IMapper _mapper;
-        
+
 
         public ClientRepository(DataContext context, IMapper mapper)
         {
@@ -35,7 +31,7 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Managers
         }
 
         public async Task<MemberDto> GetClientByIdAsync(int id)
-        {          
+        {
             var users = await _context.Users.ProjectTo<MemberDto>(_mapper.ConfigurationProvider).ToListAsync();
             return users.Where(x => x.Id == id).SingleOrDefault();
         }
@@ -53,14 +49,14 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Managers
                 .Where(x => x.Fullname == clientname)
                 .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
                 .SingleOrDefaultAsync();
-                                                                                                            
+
             return client;
         }
 
         public async Task<IEnumerable<MemberDto>> GetMembersAsync()
         {
-            
-            
+
+
             var clients = await _context.Users
                 .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
                 .ToListAsync();

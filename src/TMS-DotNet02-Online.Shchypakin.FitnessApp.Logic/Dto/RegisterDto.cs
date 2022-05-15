@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Dto
 {
@@ -22,9 +19,9 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Dto
 
         [Required]
         public string PhoneNumber { get; set; }
-    
+
         public string Email { get; set; }
-       
+
         public DateTime Birthday { get; set; }
     }
 }

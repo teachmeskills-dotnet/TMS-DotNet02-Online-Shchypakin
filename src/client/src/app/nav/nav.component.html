@@ -18,17 +18,17 @@
         <div class="dropdown" *ngIf="(accountService.currentUser$ | async) as user" dropdown>
             <a class="dropdown-toggle text-light" dropdownToggle>{{user.fullname || user.username || titlecase}}</a>
             <div class="dropdown-menu mt-3" *dropdownMenu>
-                <a class="dropdown-item" routerLink="members/profile">Profile</a>
+                <a class="dropdown-item" routerLink="members/profile">Аккаунт</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" (click)="logout()">Logout</a>
+                <a class="dropdown-item" (click)="logout()">Выйти</a>
             </div>
         </div>
 
         <form *ngIf="(accountService.currentUser$ | async) === null" #loginForm="ngForm" class="d-flex flex-row" (ngSubmit)="login()" 
           autocomplete="off">
           <div class="form-group text-center d-flex flex-row">
-            <button class="btn btn-primary mr-2" type="button" routerLink="/login">Login</button>
-            <button class="btn btn-success mr-2" type="button" routerLink="/register">Sign up</button>
+            <button class="btn btn-primary mr-2" type="button" routerLink="/login">Войти</button>
+            <button class="btn btn-success mr-2" type="button" routerLink="/register">Регистрация</button>
           </div>  
         </form>
       </div>

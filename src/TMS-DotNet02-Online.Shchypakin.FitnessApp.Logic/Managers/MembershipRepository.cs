@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using TMS_DotNet02_Online.Shchypakin.FitnessApp.Data.Context;
 using TMS_DotNet02_Online.Shchypakin.FitnessApp.Data.Enities;
@@ -48,7 +45,7 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Managers
         public async Task<Membership> Add(Membership membership)
         {
             await _context.Memberships.AddAsync(membership);
-            
+
             return membership;
         }
 
@@ -56,7 +53,7 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Managers
         {
             return await _context.Memberships.Where(m => m.ClientId == clientId)
                 .ProjectTo<MembershipDto>(_mapper.ConfigurationProvider).ToListAsync();
-                                        ;
+            ;
         }
     }
 }

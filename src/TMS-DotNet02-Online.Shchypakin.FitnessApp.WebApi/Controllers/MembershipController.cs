@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMS_DotNet02_Online.Shchypakin.FitnessApp.Data.Enities;
@@ -18,8 +17,8 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Controllers
         private readonly IMembershipSizeRepository _membershipSizeRepository;
         private readonly IMembershipTypeRepository _membershipTypeRepository;
 
-        public MembershipController(IMembershipRepository membershipRepository, 
-            IClientRepository clientRepository, IMapper mapper, 
+        public MembershipController(IMembershipRepository membershipRepository,
+            IClientRepository clientRepository, IMapper mapper,
             IMembershipSizeRepository membershipSizeRepository,
             IMembershipTypeRepository membershipTypeRepository)
         {
@@ -52,14 +51,14 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Controllers
         [HttpPost("AddType")]
         public async Task<ActionResult<MembershipType>> AddType(string membershipType)
         {
-            if(_membershipTypeRepository.MembershipTypeNameExists(membershipType))
+            if (_membershipTypeRepository.MembershipTypeNameExists(membershipType))
             {
                 return BadRequest("A type with the same name already exists");
             }
 
             var newType = await _membershipTypeRepository.Add(new MembershipTypeDto { Type = membershipType });
 
-            if( await _membershipTypeRepository.SaveAllAsync())
+            if (await _membershipTypeRepository.SaveAllAsync())
             {
                 return Ok(newType);
             }

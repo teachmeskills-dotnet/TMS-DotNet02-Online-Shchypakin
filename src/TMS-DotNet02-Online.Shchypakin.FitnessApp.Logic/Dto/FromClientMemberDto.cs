@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Dto
 {
-    public  class FromClientMemberDto
+    public class FromClientMemberDto
     {
         public int Id { get; set; }
 

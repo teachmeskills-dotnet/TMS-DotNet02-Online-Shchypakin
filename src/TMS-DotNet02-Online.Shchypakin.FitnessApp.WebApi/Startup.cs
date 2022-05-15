@@ -1,18 +1,8 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using TMS_DotNet02_Online.Shchypakin.FitnessApp.Data.Context;
 using TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Extentions;
 using TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Middleware;
 
@@ -33,7 +23,7 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApplicationServices(_config);
-            services.AddControllers();           
+            services.AddControllers();
             services.AddIndentityServices(_config);
             services.AddSwaggerServices();
         }

@@ -19,7 +19,7 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Data.Configurations
             builder.ToTable(Table.Clients, Schema.Client)
                 .HasKey(client => client.Id);
 
-            builder.Property(client => client.Id).IsRequired();              
+            builder.Property(client => client.Id).IsRequired();
 
             builder.Property(client => client.Fullname)
                 .IsRequired()

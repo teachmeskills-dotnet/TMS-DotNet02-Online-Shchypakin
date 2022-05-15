@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using TMS_DotNet02_Online.Shchypakin.FitnessApp.Data.Context;
 using TMS_DotNet02_Online.Shchypakin.FitnessApp.Data.Enities;
@@ -12,7 +9,7 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Managers
 {
     public static class Seed
     {
-        public static async Task SeedData(UserManager<Client> userManager, 
+        public static async Task SeedData(UserManager<Client> userManager,
             DataContext context, RoleManager<AppRole> roleManager)
         {
             MembershipSize membershipSize8 = new MembershipSize
@@ -101,7 +98,7 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.Logic.Managers
             await userManager.CreateAsync(admin, "Shoroh47");
             await userManager.AddToRoleAsync(client, "Member");
             await userManager.AddToRoleAsync(client1, "Member");
-            await userManager.AddToRolesAsync(admin, new[] {"Admin", "Moderator"});
+            await userManager.AddToRolesAsync(admin, new[] { "Admin", "Moderator" });
             context.Memberships.Add(membership1);
             context.Memberships.Add(membership2);
             context.Memberships.Add(membership3);

@@ -22,7 +22,7 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Controllers
         [Authorize(Roles = "Admin")]
         [HttpPost("Add")]
         public async Task<ActionResult<VideolinksDto>> Add(VideolinksDto videolink)
-        {         
+        {
             var videolinkToAdd = _mapper.Map<Videolinks>(videolink);
 
             var videolinkToSend = await _videolinksRepository.Add(videolinkToAdd);

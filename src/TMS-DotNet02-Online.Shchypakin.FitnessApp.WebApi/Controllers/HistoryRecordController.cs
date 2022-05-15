@@ -45,7 +45,7 @@ namespace TMS_DotNet02_Online.Shchypakin.FitnessApp.WebApi.Controllers
                 return NotFound("Такой записи в базе не существует");
 
 
-            if(await _recordRepository.Remove(id))
+            if (await _recordRepository.Remove(id))
             {
                 return Ok();
             }
