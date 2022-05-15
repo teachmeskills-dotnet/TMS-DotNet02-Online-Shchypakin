@@ -1,0 +1,51 @@
+<div class="card bg-light mb-2">
+    <div class="card-body">
+        <div class="title">
+            <h2 *ngIf="membership.online">
+                {{membership.membershipType.type}} {{membership.membershipSize.count}} Онлайн
+            </h2>
+            <h2 *ngIf="!membership.online">
+                {{membership.membershipType.type}} {{membership.membershipSize.count}} Оффлайн
+            </h2>
+            <div class="material-icons" type="button" (click)="onUpdateClick()" *ngIf="editable">edit</div> 
+        </div>       
+        <hr class="mt-0">
+        <div class="parent">
+            <div class="child flex-child">
+                <h3>
+                    Дата начала: {{membership.start | date: "dd MMMM YYYY"}}
+                </h3>
+                <h3>
+                    Дата окончания: {{membership.end | date: "dd MMMM YYYY"}}
+                </h3> 
+                <h3>
+                    Осталось занятий: {{membership.visitsLeft}}
+                </h3>
+                <button type="button" class="btn btn-link" (click)="isCollapsed = !isCollapsed"
+                        [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic" *ngIf="isCollapsed">Показать даты посещений
+                </button>
+                <button type="button" class="btn btn-link" (click)="isCollapsed = !isCollapsed"
+                        [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic" *ngIf="!isCollapsed">Скрыть даты посещений
+                </button>
+                <hr>
+                <div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="false"
+                    *ngFor="let record of records$ | async" [value]="record.date">
+                    <div class="parent">
+                        <div class="child flex-child">
+                            <div class="well well-lg card card-block card-header">{{record.date | date: "dd MMMM YYYY"}}</div>
+                        </div>
+                        <div class="child flex-child">
+                            <button class="btn btn-danger mt-2" type="button" 
+                                    (click)="onRemoveClick(record.id)" *ngIf="editable">Удалить</button>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+            <div class="box">
+                <button class="btn btn-success mt-2" type="button" style="height: 5ex;" 
+                        (click)="onAddClick()" *ngIf="editable">Отметить посещение</button> 
+                                  
+            </div>                                                  
+        </div>   
+    </div>
+</div>  

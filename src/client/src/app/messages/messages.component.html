@@ -1,0 +1,74 @@
+
+<!--
+<iframe width="420" height="315"
+    src="//www.youtube-nocookie.com/embed/playlist?list=PLtahtBiHhZvGF1rmWFUOWbwkZfD0OYFPU&rel=0&modestbranding=1&autohide=1&?showinfo=0" 
+    allowfullscreen frameborder="0"></iframe>
+
+  https://drive.google.com/file/d/1t_zcYNBwrDPOtIXiEFKcuhlzb5aGy1UE/preview
+
+  <div  style="width: 640px; height: 480px; position: relative;">
+    <iframe src="//www.youtube-nocookie.com/embed/playlist?list=PLtahtBiHhZvGF1rmWFUOWbwkZfD0OYFPU&rel=0&modestbranding=1&autohide=1&?showinfo=0" 
+    width="600" height="400" allow="autoplay" allowfullscreen frameborder="0" scrolling="no" seamless="" ></iframe> 
+    <div style="width: 80px; height: 80px; position: absolute; opacity: 0; right: 0px; top: 0px;"> </div>
+</div>
+
+<iframe src="https://player.vimeo.com/video/708405257?h=81e3b76e09" 
+width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+
+<div class="wrapper mat-typography" fxLayout="column" fxLayoutGap="32px">
+  <mat-card style="width: 640px;">
+    <mat-card-title>Youtube</mat-card-title>
+    <mat-card-subtitle>Plyr with Yotube video as a source</mat-card-subtitle>
+
+    <div mat-card-image plyr plyrTitle="Video from Youtube" [plyrSources]="youtubeSources">
+    </div>
+
+    <mat-card-actions>
+      <a mat-raised-button color="primary" href="https://github.com/smnbbrv/ngx-plyr/tree/master/src/app">Source
+        code</a>
+    </mat-card-actions>
+  </mat-card>
+</div>
+  "https://drive.google.com/file/d/1t_zcYNBwrDPOtIXiEFKcuhlzb5aGy1UE/preview"
+   <plyr style="display: block; width: 640px;" plyrTitle="Video 1" [plyrSources]="videoSources" (plyrInit)="player = $event"
+ (plyrPlay)="played($event)" youtube data-plyr-config='{ "noCookie: true }' disableContextMenu="true"></plyr>
+ -->
+<h2 *ngIf="member.memberships.length > 0">Отличной тренировки!</h2>
+<div class="parent"  *ngIf="member.memberships.length > 0">
+  
+    <div class="col-6 mt-2">  
+        <div class="plyr__video-embed" id="player">
+          <iframe id="AppFrame" [src]="urlSafe"
+            width="1280" height="960" allowfullscreen></iframe>
+        </div>
+        <div style="width: 80px; height: 80px; position: absolute; opacity: 0; right: 0px; top: 0px;"> </div>
+        
+    </div>
+    <div class="col-4">
+      <h2>Выберете программу:</h2>
+      <div class="inline">
+        <select class="form-control mt-2 ml-2" [(ngModel)]="selectedLink" (change)="onSelected()">
+          <option *ngFor="let link of links" [ngValue]="link">
+              {{link.name}}
+          </option>
+        </select> 
+        <button class="btn btn-danger ml-5 mt-2 mr-2 mb-2" (click)="onRemoveLink()" 
+          *appHasRole='["Admin", "Moderator"]'>Удалить</button>
+      </div>
+        
+      <div *appHasRole='["Admin", "Moderator"]'>
+        <div class="child flex-child card bg-light mb-2 ml-2 mt-2">
+          <h3 style="text-align:center" class="mt-2">Добавить видео</h3>
+          <input type="text" class="form-control col-8 ml-5 mt-2" name="type" [(ngModel)]="nameToAdd" placeholder="Название"> 
+          <input type="text" class="form-control col-8 ml-5 mt-2" name="type" [(ngModel)]="urlToAdd" placeholder="Ссылка">
+          <button class="btn btn-success col-4 ml-5 mt-2 mr-2 mb-2" (click)="onAddLink()">Добавить</button>
+        </div>  
+      </div>
+    
+  </div>
+</div> 
+<h2 *ngIf="member.memberships.length == 0">Для доступа к онлайн тренировкам необходим действующий абонемент</h2> 
+
+  
+
+ 

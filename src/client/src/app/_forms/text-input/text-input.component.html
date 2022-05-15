@@ -1,0 +1,15 @@
+<div class="form-group"> 
+    <input 
+        [class.is-invalid]='ngControl.touched && ngControl.invalid'
+        type={{type}} 
+        class="form-control mt-2" 
+        [formControl]="ngControl.control" 
+        placeholder={{label}}>
+    <div *ngIf="ngControl.control.errors?.required" 
+        class="invalid-feedback">Необходимо заполнить поле</div>
+    <div *ngIf="ngControl.control.errors?.minlength" 
+        class="invalid-feedback">Размер должен быть не менее {{ngControl.control.errors.minlength['requiredLength']}}</div>
+    <div *ngIf="ngControl.control.errors?.isMatching" 
+        class="invalid-feedback">Пароли не совпадают</div>
+                
+</div>

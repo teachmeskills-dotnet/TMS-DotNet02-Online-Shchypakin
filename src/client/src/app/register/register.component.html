@@ -1,0 +1,32 @@
+<div class="row justify-content-center">
+    <div class="col-4">
+        <form [formGroup]="registerForm" (ngSubmit)="register()" autocomplete="off">
+            <h2 class="text-center text-default">Регистрация</h2>
+            <hr>
+            <app-text-input [formControl]='registerForm.controls["username"]' 
+                [label]="'Логин'"></app-text-input>
+            <app-text-input [formControl]='registerForm.controls["lastname"]' 
+                [label]="'Фамилия'"></app-text-input>
+            <app-text-input [formControl]='registerForm.controls["firstname"]' 
+                [label]="'Имя'"></app-text-input>
+            <app-date-input [formControl]='registerForm.controls["birthday"]' 
+                [label]="'День рождения'"></app-date-input>
+            <app-text-input [formControl]='registerForm.controls["phoneNumber"]' 
+                [label]="'Номер телефона (+375291111111)'"></app-text-input>
+            <app-text-input [formControl]='registerForm.controls["email"]' 
+                [label]="'Email'"></app-text-input>
+            <app-text-input [formControl]='registerForm.controls["password"]' 
+                [label]="'Пароль'" 
+                [type]='"password"'></app-text-input>
+            <app-text-input [formControl]='registerForm.controls["confirmPassword"]' 
+                [label]="'Подтверждение пароля'" 
+                [type]='"password"'></app-text-input>
+            <div class="form-group text-center">
+                <button class="btn btn-success mr-2" type="submit">Регистрация</button>
+                <button class="btn btn-secondary mr-2" (click)="cancel()" type="button">Отмена</button>
+            </div>           
+        </form>
+    </div>
+</div>
+
+
