@@ -1,0 +1,61 @@
+<div class="card bg-light mb-2">
+    <div class="card-body">
+        <form [formGroup]="assignForm" (ngSubmit)="onAddClick()" autocomplete="off">
+            <h2>Абонемент</h2>
+            <hr>          
+            <div class="parent">
+                <div class="child flex-child">
+                    <div class="form-group">
+                        <label>Название</label>
+                        <select class="form-control center" formControlName="membershipTypeId">
+                            <option *ngFor="let type of types" [value]="type.id">
+                                {{type.type}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="mt-2">
+                        <div class="form-group">
+                            <label>Дата начала абонемента</label>
+                            <app-date-input [formControl]='assignForm.controls["start"]'></app-date-input> 
+                        </div>
+                    </div>
+                </div>
+                <div class="child flex-child">
+                    <div class="form-group">
+                        <label>Тип абонемента</label>
+                        <select class="form-control" formControlName="online">
+                            <option  [value]="false">
+                                Оффлайн
+                            </option>
+                            <option  [value]="true">
+                                Онлайн
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="child flex-child">
+                    <div class="form-group">
+                        <label>Количество занятий</label>
+                        <select class="form-control" formControlName="membershipSizeId">
+                            <option *ngFor="let size of sizes" [value]="size.id">
+                                {{size.count}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="mt-2">
+                        <div class="form-group">
+                            <label>Дата окончания абонемента</label>
+                            <app-date-input [formControl]='assignForm.controls["end"]'></app-date-input>                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="btn btn-success mt-2" type="submit">Назначить</button>
+        </form>
+        
+    </div>
+</div>
+
+
+

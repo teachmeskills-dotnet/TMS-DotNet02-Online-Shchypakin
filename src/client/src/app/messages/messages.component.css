@@ -1,0 +1,22 @@
+p {
+    font-family: Lato;
+  }
+
+  .plyr__controls {
+    display: none;
+    }
+
+    .parent{
+      display: flex;      
+  }
+
+  .inline {
+    display: flex;
+  }
+
+  .wrapper {
+    padding: 32px;
+  }
+
+  .ndfHFb-c4YZDc-Wrql6b{visibility: hidden};
+  

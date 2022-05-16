@@ -1,0 +1,35 @@
+<h2 *ngIf="member.memberships.length > 0">Отличной тренировки!</h2>
+<div class="parent"  *ngIf="member.memberships.length > 0">
+  
+    <div class="col-6 mt-2">  
+        <div class="plyr__video-embed" id="player">
+          <iframe id="AppFrame" [src]="urlSafe"
+            width="1280" height="960" allowfullscreen></iframe>
+        </div>
+        <div style="width: 80px; height: 80px; position: absolute; opacity: 0; right: 0px; top: 0px;"> </div>
+        
+    </div>
+    <div class="col-4">
+      <h2>Выберете программу:</h2>
+      <div class="inline">
+        <select class="form-control mt-2 ml-2" [(ngModel)]="selectedLink" (change)="onSelected()">
+          <option *ngFor="let link of links" [ngValue]="link">
+              {{link.name}}
+          </option>
+        </select> 
+        <button class="btn btn-danger ml-5 mt-2 mr-2 mb-2" (click)="onRemoveLink()" 
+          *appHasRole='["Admin", "Moderator"]'>Удалить</button>
+      </div>
+        
+      <div *appHasRole='["Admin", "Moderator"]'>
+        <div class="child flex-child card bg-light mb-2 ml-2 mt-2">
+          <h3 style="text-align:center" class="mt-2">Добавить видео</h3>
+          <input type="text" class="form-control col-8 ml-5 mt-2" name="type" [(ngModel)]="nameToAdd" placeholder="Название"> 
+          <input type="text" class="form-control col-8 ml-5 mt-2" name="type" [(ngModel)]="urlToAdd" placeholder="Ссылка">
+          <button class="btn btn-success col-4 ml-5 mt-2 mr-2 mb-2" (click)="onAddLink()">Добавить</button>
+        </div>  
+      </div>
+    
+  </div>
+</div> 
+<h2 *ngIf="member.memberships.length == 0">Для доступа к онлайн тренировкам необходим действующий абонемент</h2> 

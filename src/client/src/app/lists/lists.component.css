@@ -1,0 +1,16 @@
+.parent{
+    display: flex;
+    justify-content: space-between;
+    align-items: auto;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.evenParent{
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;;
+}
